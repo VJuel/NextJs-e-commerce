@@ -1,8 +1,19 @@
 'use client'
-import React from 'react';
-import {handleLogout} from "@/utils/handleLogout";
+import {signOut} from "next-auth/react";
+import { useRouter } from "next/router";
+import {useEffect} from "react";
+
+
 
 export function ButtonLogout() {
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        await signOut({ redirect: false })
+        await router.push('/')
+        // Effectue ici toute action supplémentaire que tu souhaites après la déconnexion
+    }
+
     return (
         <button className="flex gap-4 p-1 bg-red-500 w-[75%] rounded-md" onClick={handleLogout}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

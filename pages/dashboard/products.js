@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useState} from 'react';
 import Layout from "@/components/Layout";
 import Link from "next/link";
@@ -43,7 +44,7 @@ export default function Products() {
                 </table>
             ) : (
                 <table className='basic mt-2'>
-                    <thead>
+                    <thead className="border-2 border-blue-800">
                     <tr>
                         <td className="text-2xl">Product name</td>
                         <td></td>

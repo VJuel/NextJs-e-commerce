@@ -36,7 +36,10 @@ Le projet suit une structure organisée pour faciliter le développement et la m
 cd votre-projet
 
 ### Installez les dépendances du projet.
-npm install (j'utilise pnpm pour ma part)
+```shell
+npm install 
+
+(j'utilise pnpm pour ma part)
 
 ### Configurez les variables d'environnement
 Créez un fichier .env.local à la racine du projet et ajoutez les variables suivantes :
@@ -57,6 +60,7 @@ BUCKETNAME
 EMAIL_ADMIN
 
 ### Lancez l'application.
+```shell
 npm run dev
 
 L'application sera accessible à l'adresse http://localhost:3000.

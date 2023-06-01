@@ -1,7 +1,5 @@
-'use client';
-
-import {useSession, signIn, signOut} from "next-auth/react";
-import Nav from "@/components/Nav";
+'use client'
+import {useSession} from "next-auth/react";
 import Layout from "@/components/Layout";
 
 export default function Dashboard() {

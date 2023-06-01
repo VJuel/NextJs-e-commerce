@@ -1,3 +1,4 @@
+'use client'
 
 import React from 'react';
 import {signIn, useSession} from "next-auth/react";
@@ -30,9 +31,9 @@ const Layout = ({children}) => {
                     {/*<Logo />*/}
                 </div>
             </div>
-            <div className="flex">
+            <div className="flex bg-blue-800">
                 <Nav />
-                <div className="flex-grow p-4 rounded-l-xl">
+                <div className="flex-grow p-4 rounded-l-xl rounded-r-xl bg-white mt-2 mr-2 mb-2">
                     {children}
                 </div>
             </div>

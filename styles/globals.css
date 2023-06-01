@@ -47,7 +47,7 @@ label {
     @apply flex bg-blue-800 h-full px-4 py-2 gap-2 rounded-lg text-white
 }
 .btn-default {
-    @apply flex bg-gray-500 h-full px-4 py-2 w-1/3 gap-2 rounded-lg text-white
+    @apply flex bg-gray-500 h-full px-4 py-2 w-fit gap-2 rounded-lg text-white
 }
 .basic {
     @apply mt-5 border-blue-800 border-2 w-full
