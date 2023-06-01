@@ -1,38 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJs-e-commerce
 
-## Getting Started
+Le projet NextJs-e-commerce est un site e-commerce développé avec Next.js, offrant une expérience de magasinage en ligne conviviale et sécurisée.
+Le site comprend une partie admin pour la gestion des produits, des commandes et des utilisateurs, ainsi qu'une partie client pour les utilisateurs qui souhaitent explorer et acheter des produits.
 
-First, run the development server:
+## Fonctionnalités
 
-```bash
+### Partie Client
+
+- Parcours de produits : Les utilisateurs peuvent naviguer facilement à travers les différentes catégories de produits, afficher les détails des produits individuels et ajouter des articles à leur panier.
+- Panier d'achat : Les utilisateurs peuvent gérer leur panier en ajoutant, supprimant ou modifiant les quantités des articles sélectionnés. Ils peuvent également passer à la caisse pour finaliser leur commande.
+- Authentification avec Google : Les utilisateurs peuvent s'inscrire et se connecter en utilisant leur compte Google, ce qui offre une expérience d'authentification rapide et sécurisée.
+- Historique des commandes : Les utilisateurs peuvent consulter l'historique de leurs commandes passées et suivre l'état de livraison de chaque commande.
+
+### Partie Admin
+
+- Gestion des produits : Les administrateurs peuvent ajouter de nouveaux produits, mettre à jour les informations des produits existants et supprimer des produits.
+- Gestion des commandes : Les administrateurs peuvent afficher toutes les commandes passées, les marquer comme traitées et gérer l'état de livraison.
+- Gestion des utilisateurs : Les administrateurs ont la possibilité de gérer les utilisateurs en affichant leurs informations, en les désactivant ou en les supprimant si nécessaire.
+
+## Technologies utilisées
+
+- Next.js : Un framework React pour le rendu côté serveur, offrant des performances élevées et des fonctionnalités avancées.
+- Tailwind CSS : Un framework CSS utilitaire qui facilite la création d'interfaces attrayantes et réactives.
+- MongoDB : Une base de données NoSQL flexible et évolutive, utilisée pour stocker les informations sur les produits, les commandes et les utilisateurs.
+- NextAuth.js : Une bibliothèque d'authentification pour Next.js qui facilite l'intégration de différentes stratégies d'authentification, y compris l'authentification Google pour une connexion rapide et sécurisée.
+
+## Structure du projet
+
+Le projet suit une structure organisée pour faciliter le développement et la maintenance. Les pages Next.js sont placées dans le répertoire `pages/`, les composants réutilisables dans `components/`, les styles dans `styles/`, les fichiers statiques dans `public/`, les modèles de données MongoDB dans `models/`, et les fonctions utilitaires et configurations dans `lib/`.
+
+
+## Start Application
+
+### Accédez au répertoire du projet.
+cd votre-projet
+
+### Installez les dépendances du projet.
+npm install (j'utilise pnpm pour ma part)
+
+### Configurez les variables d'environnement
+Créez un fichier .env.local à la racine du projet et ajoutez les variables suivantes :
+
+#### MongoDB
+MONGODB_URI
+
+### #GOOGLE AUTH
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+
+#### AWS S3
+S3_ACCESS_KEY
+S3_SECRET_ACCESS_KEY
+BUCKETNAME
+
+#### EMAIL ADMIN
+EMAIL_ADMIN
+
+### Lancez l'application.
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera accessible à l'adresse http://localhost:3000.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Auteur
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Ce projet est développé et maintenu par Vicktor Juhel.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```shell
+git clone https://github.com/votre-utilisateur/votre-projet.git
