@@ -2,10 +2,13 @@ import multiparty from 'multiparty'
 import {PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
 import fs from 'fs'
 import mime from "mime-types";
+import {isAdminRequest} from "@/pages/api/auth/[...nextauth]";
 
 export default async function handle(req, res) {
     // res.setHeader('Content-Type', 'application/json')
     // res.setHeader('charset', 'utf-8')
+    await isAdminRequest(req,res);
+
     const form = new multiparty.Form()
     const {fields, files} = await new Promise((resolve, reject) => {
         form.parse(req, function(err, fields, files)  {

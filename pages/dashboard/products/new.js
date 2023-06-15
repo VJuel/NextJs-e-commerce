@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "@/components/Layout";
+import Layout from "@/components/admin/Layout";
 import {useRouter} from "next/router";
 import axios from "axios";
-import ProductForm from "@/components/ProductForm";
+import ProductForm from "@/components/admin/ProductForm";
 
 export default function NewProduct() {
     const [productInfo, setProductInfo] = useState(null);

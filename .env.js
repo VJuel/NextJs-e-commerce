@@ -1,1 +1,0 @@
-export const EMAIL_ADMIN="v.juhel@gorilles.fr"

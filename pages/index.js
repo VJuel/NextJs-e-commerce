@@ -1,34 +1,50 @@
-import {signIn, signOut, useSession} from 'next-auth/react'
-import {useRouter} from 'next/router'
-import {useEffect} from 'react'
-import {EMAIL_ADMIN} from '../.env.js'
-const emailAdmin = EMAIL_ADMIN
+'use client'
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@/pages/api/auth/[...nextauth]";
+import {useRouter} from "next/router";
+import {useSession} from "next-auth/react";
 
-export default function Home() {
-    const {data: session} = useSession()
-    const router = useRouter()
+export const getServerSideProps = async (context) => {
+        const session = await getServerSession(context.req, context.res, authOptions); // Supposons que les informations de l'utilisateur soient stockées dans la session
 
-    useEffect(() => {
-        if (session) {
-            if (session.user.email === emailAdmin) {
-                // L'email correspond à celui choisi, redirige vers la page de tableau de bord
-                router.push('/dashboard')
-            } else {
-                // L'utilisateur est connecté mais l'email ne correspond pas, redirigez vers la page d'accueil
-                router.push('/homepage')
+        if (!session) {
+            return {
+                redirect: {
+                    destination: '/login', // Rediriger vers la page de connexion
+                    permanent: false,
+                },
+                props: {}
             }
         }
-    }, [session])
+
+        if (session && session?.user?.role === 'ADMIN') {
+            return {
+                redirect: {
+                    destination: '/dashboard', // Rediriger vers la page de connexion
+                    permanent: false,
+                },
+                props: {}
+            };
+        }
+        return {
+            props: {
+                session
+            }
+        }
+    }
+;
+
+export default function Home() {
+    const router = useRouter()
+    const {data: session, status} = useSession()
+    console.log(session)
 
     if (!session) {
-        return (
-            <div className="bg-blue-800 h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <button onClick={() => signIn('google')} className="bg-white px-4 py-2 rounded-lg">
-                        Login with Google
-                    </button>
-                </div>
-            </div>
-        )
+        router.push('/login')
     }
+    return (
+        <>
+            <h1>Pas de log</h1>
+        </>
+    )
 }

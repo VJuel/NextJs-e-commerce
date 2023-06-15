@@ -1,9 +1,12 @@
 import {Category} from "@/models/Category";
 import moongooseConnect from "@/lib/moongoose";
+import {isAdminRequest} from "@/pages/api/auth/[...nextauth]";
 
 export default async function handle(req, res) {
     const {method} = req
     await moongooseConnect()
+    // await isAdminRequest(req,res);
+
 
     if (method === 'GET') {
         await res.json(await Category.find().populate('parent'))

@@ -43,20 +43,35 @@ label {
     @apply text-xl
 }
 
+.black {
+    background: #222;
+}
+.header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 80px;
+    background: white;
+    z-index: 30;
+}
+
 .btn-primary {
-    @apply flex bg-blue-800 h-full px-4 py-2 gap-2 rounded-lg text-white
+    @apply flex border border-gray-200 text-gray-600 bg-white w-fit px-4 py-2 gap-2 shadow-sm
+}
+.btn-secondary {
+    @apply flex bg-red-200 h-full px-4 py-2 text-red-500 w-fit gap-2 shadow-sm
 }
 .btn-default {
-    @apply flex bg-gray-500 h-full px-4 py-2 w-fit gap-2 rounded-lg text-white
+    @apply flex bg-gray-500 px-2 py-1 w-fit gap-2 rounded-lg text-white
 }
 .basic {
-    @apply mt-5 border-blue-800 border-2 w-full
+    @apply mt-5 w-full
 }
-.basic tbody tr td {
-    @apply border-2 border-blue-400
+.basic tbody tr {
+    border: 1px solid #c2bfc7;
 }
 .basic thead tr td {
-    @apply bg-blue-800 text-white p-2
+    @apply text-gray-400 px-2 py-1 border-none
 }
 
 .table-skelton tbody tr td {
@@ -66,3 +81,7 @@ label {
 .btn-delete {
     @apply px-4 py-2 rounded-lg text-white text-lg min-w-[60px]
 }
+
+/*.nav {*/
+/*    @apply sm*/
+/*}*/

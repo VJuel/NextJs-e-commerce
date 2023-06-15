@@ -14,7 +14,7 @@ export default function ProductForm({
                                         price: existingPrice,
                                         images: existingImages,
                                         category: assignedCategories,
-                                        propreties: assignedProreties,
+                                        // propreties: assignedProreties,
                                     }) {
     const [title, setTitle] = useState(existingTitle || '')
     const [description, setDescription] = useState(existingDescription || '')
@@ -22,7 +22,7 @@ export default function ProductForm({
     const [images, setImages] = useState(existingImages || [])
     const [category, setCategory] = useState(assignedCategories || '')
     const [categories, setCategories] = useState([] || undefined)
-    const [productPropreties, setProductProperties] = useState({} || assignedProreties)
+    // const [productPropreties, setProductProperties] = useState({} || assignedProreties)
     const [goToProducts, setGoToProducts] = useState(false)
     const [isUploading, setIsUploading] = useState(false)
     const router = useRouter()
@@ -81,32 +81,39 @@ export default function ProductForm({
     }
 
 
-    function setProductProps(propName, value) {
-        setProductProperties(prev => {
-            const newProductProps = {...prev}
-            newProductProps[propName] = value;
-            return newProductProps
-        })
-    }
+    // function setProductProps(propName, value) {
+    //     setProductProperties(prev => {
+    //         const newProductProps = {...prev}
+    //         newProductProps[propName] = value;
+    //         return newProductProps
+    //     })
+    // }
 
 
-    const propretiesToFill = [];
-    if (categories.length > 0 && category) {
-        let catInfo = categories.find(({_id}) => _id === category);
-        console.log(categories.find(({_id}) => _id === category))
-        propretiesToFill.push(...catInfo?.propreties);
-        while (catInfo?.parent?._id) {
-            const parentCat = categories.find(({_id}) => _id === catInfo?.parent?._id);
-            propretiesToFill.push(...parentCat.propreties);
-            console.log(propretiesToFill);
-            catInfo = parentCat;
-        }
-    }
+    //TODO PROPRETIES CAN CHANGE IN PRODUCT/EDIT
+
+    // console.log(category)
+    // console.log(categories[0]?.name)
+    // console.log(categories[0].id)
+    // let catInfo = categories.find(({_id}) => _id === categories);
+    // console.log({catInfo})
+    //
+    // const propretiesToFill = [];
+    // if (categories.length > 0 && category) {
+    //     console.log(categories.find(({el}) => _id === category))
+    //     propretiesToFill.push(...catInfo?.propreties);
+    //     while (catInfo?.parent?._id) {
+    //         const parentCat = categories.find(({_id}) => _id === catInfo?.parent?._id);
+    //         propretiesToFill.push(...parentCat.propreties);
+    //         console.log(propretiesToFill);
+    //         catInfo = parentCat;
+    //     }
+    // }
 
     return (
         <form onSubmit={saveProduct}>
             <div className="flex flex-col">
-                <label>Product name</label>
+                <label className="">Product name</label>
                 <input type="text" placeholder="Product name"
                        value={title}
                        onChange={el => setTitle(el.target.value)}/>
@@ -121,25 +128,25 @@ export default function ProductForm({
                         </option>
                     ))}
                 </select>
-                {propretiesToFill.length > 0 && propretiesToFill.map(p => (
-                    <div className="flex gap-1">
-                        <div>{p.name}</div>
-                        <select onChange={ev =>
-                            setProductProps(p.name, ev.target.value)}>
-                            {p.values.map(v => (
-                                <option value={v}>{v}</option>
-                            ))}
-                        </select>
-                    </div>
-                ))}
+                {/*{propretiesToFill.length > 0 && propretiesToFill.map(p => (*/}
+                {/*    <div className="flex gap-1">*/}
+                {/*        <div>{p.name}</div>*/}
+                {/*        <select onChange={ev =>*/}
+                {/*            setProductProps(p.name, ev.target.value)}>*/}
+                {/*            {p.values.map(v => (*/}
+                {/*                <option value={v}>{v}</option>*/}
+                {/*            ))}*/}
+                {/*        </select>*/}
+                {/*    </div>*/}
+                {/*))}*/}
                 <label>
                     Photos
                 </label>
-                <div className="mt2 flex justify-start items-center gap-4 h-full">
-                    <ReactSortable className="flex items-center gap-2" list={images} setList={updateImagesOrder}>
+                <div className="mt2 flex justify-start items-center gap-4 h-full flex-wrap md:flex-nowrap">
+                    <ReactSortable className="flex items-center gap-2 flex-wrap md:flex-nowrap" list={images} setList={updateImagesOrder}>
                         {!!images?.length ? images.map(link => (
-                            <div key={link} className="w-20 h-full flex">
-                                <img className="h-full object-cover rounded-lg" src={link} alt="product img"/>
+                            <div key={link} className="w-auto h-24 flex p-2">
+                                <img className="h-full object-cover" src={link} alt="product img"/>
                             </div>
                         )) : (
                             <div className="mt-4">No photos in this product</div>
@@ -159,7 +166,6 @@ export default function ProductForm({
                             <path strokeLinecap="round" strokeLinejoin="round"
                                   d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15"/>
                         </svg>
-
                         <input type="file" onChange={uploadImages} className="hidden"/>
                     </label>
                 </div>

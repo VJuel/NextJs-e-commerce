@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/admin/Layout";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {withSwal} from 'react-sweetalert2';
@@ -115,8 +115,8 @@ function Categories({swal}) {
             <label>{editedCategory ? `Edit category ${editedCategory.name}` : 'New categories name'}</label>
             <form onSubmit={saveCategory} className="flex gap-2 w-full">
                 <div className="flex flex-col gap-2">
-                    <div className="flex gap-2">
-                        <input className="flex-grow" type="text" placeholder="Categories name"
+                    <div className="flex gap-2 flex-wrap md:flex-nowrap">
+                        <input className="flex-grow-0 md:flex-grow" type="text" placeholder="Categories name"
                                onChange={ev => setName(ev.target.value)} value={name}/>
                         <select onChange={ev => setParentCategory(ev.target.value)} value={parentCategory}>
                             <option value="">No parent category</option>
@@ -134,7 +134,7 @@ function Categories({swal}) {
                         Add propreties
                     </button>
                     {propreties.length > 0 && propreties.map((el, index) => (
-                        <div className="flex gap-1" key={index}>
+                        <div className="flex gap-1 flex-wrap md:flex-nowrap" key={index}>
                             <input
                                 type="text"
                                 placeholder="Name"
@@ -148,7 +148,7 @@ function Categories({swal}) {
                                 onChange={ev => handlePropretyValueChange(index, el, ev.target.value)}
                             />
                             <button
-                                className="btn-default"
+                                className="btn-default !bg-red-400"
                                 onClick={() => removeProprety(index)}
                             >
                                 Remove
@@ -176,7 +176,7 @@ function Categories({swal}) {
                 </div>
             </form>
             {!editedCategory && (
-                <table className="basic mt-4 bg-blue-200">
+                <table className="basic mt-4 bg-blue-200 table-caption md:table">
                     <thead>
                     <tr>
                         <td className="w-full">
@@ -199,7 +199,7 @@ function Categories({swal}) {
                                 <td className="text-center">
                                     {category?.parent?.name}
                                 </td>
-                                <td className="flex gap-2 py-2 px-1">
+                                <td className="flex gap-2 py-2 px-1 flex-col md:flex-row">
                                     <button className="btn-primary"
                                             onClick={() => editCategory(category)}>
                                         Edit
@@ -209,7 +209,7 @@ function Categories({swal}) {
                                                   d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
                                         </svg>
                                     </button>
-                                    <button className="btn-primary"
+                                    <button className="btn-secondary"
                                             onClick={() => deleteCategories(category)}>
                                         Delete
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

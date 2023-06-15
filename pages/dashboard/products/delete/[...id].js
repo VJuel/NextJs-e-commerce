@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "@/components/Layout";
+import Layout from "@/components/admin/Layout";
 import axios from "axios";
 import {useRouter} from "next/router";
 import Link from "next/link";

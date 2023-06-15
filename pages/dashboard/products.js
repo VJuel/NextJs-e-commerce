@@ -1,6 +1,6 @@
 'use client'
 import React, {useEffect, useState} from 'react';
-import Layout from "@/components/Layout";
+import Layout from "@/components/admin/Layout";
 import Link from "next/link";
 import axios from "axios";
 import {ClipLoader} from "react-spinners";
@@ -25,7 +25,7 @@ export default function Products() {
             <h1 className="title-dashboard mb-2">Products</h1>
 
             <Link href="/dashboard/products/new"
-                  className="bg-blue-800 text-white p-2 rounded-lg font-bold">
+                  className="btn-primary">
                 Add newproduct
             </Link>
             {isLoading ? (
@@ -44,10 +44,10 @@ export default function Products() {
                 </table>
             ) : (
                 <table className='basic mt-2'>
-                    <thead className="border-2 border-blue-800">
+                    <thead className="bg-blue-200">
                     <tr>
-                        <td className="text-2xl">Product name</td>
-                        <td></td>
+                        <td className="bg-blue-200 border-l-blue-200 border-1 text-2xl whitespace-nowrap">Product name</td>
+                        <td className="bg-blue-200"></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,7 @@ export default function Products() {
                             <td className="w-1/2 pl-2">{product.title}</td>
                             <td className="p-2 flex gap-2">
                                 <Link href={"/dashboard/products/edit/" + product._id}
-                                      className="flex bg-blue-800 gap-2 p-2 rounded-lg text-white ">
+                                      className="flex b btn-primary">
                                     Edit
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -70,7 +70,7 @@ export default function Products() {
                                     </svg>
                                 </Link>
                                 <Link href={"/dashboard/products/delete/" + product._id}
-                                      className="flex bg-blue-800 gap-2 p-2 rounded-lg text-white ">
+                                      className="flex btn-secondary">
                                     Delete
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

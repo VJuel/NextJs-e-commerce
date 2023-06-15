@@ -1,18 +1,23 @@
 'use client'
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {signOut} from 'next-auth/react'
-import {ButtonLogout} from "@/components/button/ButtonLogout";
+import {signOut} from "next-auth/react";
 
-export default function Nav() {
+export default function NavFront({navActive}) {
     const inactiveLink = 'flex gap-4'
-    const activeLink = inactiveLink + ' bg-white text-blue-800 p-1 rounded-l-lg'
+    const activeLink = inactiveLink + ' bg-white [&>span]:text-gray-900 p-1 rounded-l-lg [&>svg]:stroke-primary'
     const router = useRouter()
     const {pathname} = router
 
+    async function handleLogout() {
+        await router.push('/login');
+        await signOut()
+    }
+
     return (
-        <aside className="text-white p-4 pr-0 h-screen bg-blue-800">
-            <Link href="/dashboard" className="flex gap-4 items-center mb-4 mr-2">
+        <aside
+            className={`text-gray-500 px-2 py-6 ${pathname.includes('/categories') ? 'h-full' : 'h-[calc(100vh-56px)]'} bg-Gray md:px-4 md:py-4 fixed ${!navActive ? '-left-1/2 hidden' : 'block left-0'} md:left-auto md:h-screen md:relative md:block bg-gray-200 md:w-auto w-1/2 transition-all duration-600`}>
+            <Link href="/dashboard" className="hidden md:flex gap-4 items-center mb-4 mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                      stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -51,7 +56,8 @@ export default function Nav() {
                     <span>Categories</span>
                 </Link>
 
-                <Link href="/dashboard/orders" className={pathname.includes('/dashboard/orders') ? activeLink : inactiveLink}>
+                <Link href="/dashboard/orders"
+                      className={pathname.includes('/dashboard/orders') ? activeLink : inactiveLink}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -60,7 +66,8 @@ export default function Nav() {
                     <span>Orders</span>
                 </Link>
 
-                <Link href="/dashboard/settings" className={pathname.includes('/dashboard/settings') ? activeLink : inactiveLink}>
+                <Link href="/dashboard/settings"
+                      className={pathname.includes('/dashboard/settings') ? activeLink : inactiveLink}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -70,7 +77,12 @@ export default function Nav() {
                     <span>Settings</span>
                 </Link>
 
-                    <ButtonLogout/>
+                <button className="flex gap-4 p-1 w-[75%] rounded-md" onClick={() => handleLogout('/')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Logout</span>
+                </button>
             </nav>
         </aside>
     )

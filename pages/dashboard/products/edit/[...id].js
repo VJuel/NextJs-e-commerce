@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import Layout from "@/components/Layout";
+import Layout from "@/components/admin/Layout";
 import axios from "axios";
-import ProductForm from "@/components/ProductForm";
+import ProductForm from "@/components/admin/ProductForm";
 import {useRouter} from "next/router";
 
 export default function EditProductPage()  {
