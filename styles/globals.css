@@ -2,31 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-
-  }
-}
 
 body {
- margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-input, textarea,select {
+html {
+    font-size: 16px
+}
+
+input, textarea, select {
     @apply border-2 border-gray-200 px-2 rounded-lg
 }
 
 input:focus, textarea :focus,
 input:active, textarea :active,
-select:active, select :active{
+select:active, select :active {
     @apply border-blue-800 outline-blue-800
 }
+
 img {
     max-width: 100%;
 }
@@ -46,6 +42,7 @@ label {
 .black {
     background: #222;
 }
+
 .header {
     position: -webkit-sticky;
     position: sticky;
@@ -58,18 +55,23 @@ label {
 .btn-primary {
     @apply flex border border-gray-200 text-gray-600 bg-white w-fit px-4 py-2 gap-2 shadow-sm
 }
+
 .btn-secondary {
     @apply flex bg-red-200 h-full px-4 py-2 text-red-500 w-fit gap-2 shadow-sm
 }
+
 .btn-default {
     @apply flex bg-gray-500 px-2 py-1 w-fit gap-2 rounded-lg text-white
 }
+
 .basic {
     @apply mt-5 w-full
 }
+
 .basic tbody tr {
     border: 1px solid #c2bfc7;
 }
+
 .basic thead tr td {
     @apply text-gray-400 px-2 py-1 border-none
 }
@@ -82,6 +84,33 @@ label {
     @apply px-4 py-2 rounded-lg text-white text-lg min-w-[60px]
 }
 
-/*.nav {*/
-/*    @apply sm*/
-/*}*/
+button, [type="button"] {
+    @apply bg-auto
+}
+
+.list-nav li:not(:last-child ) {
+    @apply lg:pb-0 pb-4
+}
+
+.item-nav {
+    /*@apply */
+    @apply lg:w-fit
+}
+
+.link-nav {
+}
+.link-nav:hover {
+    @apply text-primary bg-hightDark
+}
+
+.link-nav svg {
+    /*@apply stroke-primary*/
+}
+
+.btn {
+    @apply flex justify-center flex-wrap items-center
+}
+
+.drop {
+
+}

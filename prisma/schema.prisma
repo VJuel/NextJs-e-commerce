@@ -23,6 +23,7 @@ model Account {
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 enum UserRole {
@@ -36,6 +37,7 @@ model Session {
   userId       String  @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("sessions")
 }
 
 model User {
@@ -43,10 +45,12 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  image         String?
 
-  role UserRole @default(USER)
+  role          UserRole @default(USER)
   accounts      Account[]
   sessions      Session[]
+  @@map("users")
 }
 
 // model VerificationToken {
