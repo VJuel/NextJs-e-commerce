@@ -1,5 +1,4 @@
-import moongoose, {model, models, Schema} from "mongoose";
-import mongoose from "mongoose";
+import mongoose, {model, models, Schema} from "mongoose";
 
 const CategorySchema = new Schema({
     name: {type: String, required: true},
@@ -7,4 +6,4 @@ const CategorySchema = new Schema({
     propreties: [{type: Object}]
 })
 
-export const Category= moongoose.models.Category || moongoose.model('Category', CategorySchema)
+export const Category= mongoose.models.Category || mongoose.model('Category', CategorySchema)

@@ -1,12 +1,8 @@
-'use client'
-// import NavBarAdmin from "../../components/admin/NavBarAdmin";
 import Image from "next/image";
 import logo from "../../assets/moi.png";
-import {useSession} from "next-auth/react";
 import {redirect} from "next/navigation";
-// import {getServerSession} from "next-auth/next";
-// import {authOptions} from "@/src/lib/auth";
-// import {Loader} from 'rsuite';
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@/src/lib/auth";
 
 // Dashboard.auth = {
 //     role: "admin",
@@ -14,25 +10,15 @@ import {redirect} from "next/navigation";
 //     unauthorized: "/homepage", // redirect to this url
 // }
 
-export default function Dashboard() {
-    // const session = await getServerSession(authOptions);
-    const {data: session, status} = useSession()
-    const loading = status === 'loading'
+export default async function Dashboard() {
+    const session = await getServerSession(authOptions);
 
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <span className="loading loading-spinner loading-lg"></span>
-            </div>
-        )
+    if (!session) {
+        redirect('/signin')
     }
 
     if (session && session?.user?.role === 'USER') {
         return redirect('/homepage')
-    }
-
-    if (!session) {
-        return  redirect('/signin')
     }
 
     const MyLogo = (props) => {

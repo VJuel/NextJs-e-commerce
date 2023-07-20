@@ -1,12 +1,13 @@
 'use client'
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import styled from "styled-components";
 import {device} from "@/styles/abstract";
 import mac from '../../assets/macbookpro.png'
 import Image from "next/image";
 import axios from "axios";
 import BtnProduct from "@/src/components/front/button/BtnProduct";
-import {BtnAddToCart} from "@/src/components/front/button/BtnAddToCart";
+import {BtnAddToCartPrimary} from "@/src/components/front/button/BtnAddToCart";
+import {CartContext} from "@/src/components/CartContext";
 // import BtnAddToCart from "../../components/front/button/BtnAddToCart";
 // import BtnProduct from "../../components/front/button/BtnProduct";
 
@@ -85,15 +86,6 @@ const HeroBtnContainer = styled.div`
     flex-direction: column;
   }
 `
-const MyHero = (props) => {
-    return (
-        <Image
-            src={mac}
-            alt="macbook pro"
-            style={{width: '100%', objectFit: 'contain'}}
-        />
-    )
-}
 
 
 const HeroImg = styled.div`
@@ -107,23 +99,43 @@ const HeroImg = styled.div`
 `
 
 export default function Hero() {
-    const [products, setProducts] = useState([])
+    const [features, setFeatures] = useState()
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
-        axios.get('api/products',)
-            .then(res => setProducts(res.data))
+        setIsLoading(true)
+        axios.get('api/products/features',)
+            .then(res => setFeatures(res.data))
             .catch(err => console.log(err))
+        setIsLoading(false)
     }, [])
+
+
+    const MyHero = (props) => {
+        return (
+            <Image
+                src={features[0]?.images[0] || mac}
+                alt="macbook pro"
+                style={{width: '100%', objectFit: 'contain'}}
+            />
+        )
+    }
+
     return (
         <>
-            <HeroWrapper>
+            {isLoading &&
+                <div className="flex justify-center items-center max-w-3xl m-auto min-h-12">
+                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"/>
+                    loading
+                </div>}
+            {features && <HeroWrapper>
                 <HeroContainer>
                     <HeroDescr>
-                        <HeroTitle>Mac Book Pro 14</HeroTitle>
-                        <HeroText>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aspernatur
-                            cum?</HeroText>
+                        <HeroTitle>{features[0].title}</HeroTitle>
+                        <HeroText>{features[0].description}</HeroText>
                         <HeroBtnContainer>
                             <BtnProduct/>
-                            <BtnAddToCart/>
+                            <BtnAddToCartPrimary featureId={features[0]._id}/>
                         </HeroBtnContainer>
                     </HeroDescr>
 
@@ -131,7 +143,7 @@ export default function Hero() {
                         <MyHero/>
                     </HeroImg>
                 </HeroContainer>
-            </HeroWrapper>
+            </HeroWrapper>}
         </>
     );
 };

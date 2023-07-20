@@ -1,20 +1,23 @@
 'use client'
-import {useParams, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {ClipLoader} from "react-spinners";
 import {ReactSortable} from "react-sortablejs";
 
-const ObjectId = require('mongoose').Types.ObjectId;
+const mongoose = require('mongoose');
 
-export default function ProductForm({   _id,
-                                        title:existingTitle,
-                                        description:existingDescription,
-                                        price:existingPrice,
-                                        images:existingImages,
-                                        category:assignedCategory,
+
+export default function ProductForm({
+                                        _id,
+                                        title: existingTitle,
+                                        description: existingDescription,
+                                        price: existingPrice,
+                                        images: existingImages,
+                                        category: assignedCategory,
+                                        featured: assignedFeatures,
                                         // properties:assignedProperties
-}) {
+                                    }) {
     // const [productInfo, setProductInfo] = useState({} || undefined)
     const [title, setTitle] = useState(existingTitle || '')
     const [description, setDescription] = useState(existingDescription || '')
@@ -22,22 +25,32 @@ export default function ProductForm({   _id,
     const [images, setImages] = useState(existingImages || [])
     const [category, setCategory] = useState(assignedCategory || '')
     const [categories, setCategories] = useState([] || undefined)
+    const [featured, setFeatured] = useState(assignedFeatures || false)
     // const [productPropreties, setProductProperties] = useState({} || assignedProreties)
     const [goToProducts, setGoToProducts] = useState(false)
     const [isUploading, setIsUploading] = useState(false)
     const router = useRouter()
+    const ObjectId = mongoose.Types.ObjectId;
 
     useEffect(() => {
-        axios.get('/api/categories').then(result => {
-            setCategories(result.data)
-        })
+        getCategories()
     }, []);
 
+    function getCategories() {
+        axios.get('/api/categories', {next: {revalidate: 10}})
+            .then(res => {
+                setCategories(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     async function isValidObjectId(id) {
-        const product = {title, description, price, images, category}
+        const product = {title, description, price, images, category, featured, id}
         const idDate = new ObjectId(id).toString()
         if (idDate === id) {
-            return await axios.put('/api/products', {...product, id});
+            return await axios.put('/api/products', product);
         } else {
             return await axios.post('/api/products', product)
         }
@@ -46,34 +59,32 @@ export default function ProductForm({   _id,
     async function saveProduct(e) {
         e.preventDefault()
         await isValidObjectId(_id)
-        setGoToProducts(true)
+        await router.push('/dashboard/products')
     }
-
-    if (goToProducts) {
-        router.push('/dashboard/products')
-    }
-
 
     async function uploadImages(ev) {
+        console.log(ev)
+        const value = URL.createObjectURL(ev.target.files[0]).substr(5)
         const files = ev.target?.files;
-        setIsUploading(true)
-        if (files.length > 0) {
-            const formData = new FormData()
+        if (files?.length > 0) {
+            setIsUploading(true);
+            const data = new FormData();
             for (const file of files) {
-                await formData.append('file', file)
+                file.path = value
+                data.append('file', file);
+                console.log(data.get('file'))
+                // data.set("webkitRelativePath", file, window.URL.createObjectURL(file));
             }
-            try {
-                const res = await axios.post('/api/upload', formData);
-                setImages(oldImages => {
-                    return [...oldImages, ...res.data.links];
-                });
-                setIsUploading(false)
-            } catch
-                (err) {
-                console.log('Error uploading file:', err)
-            }
+            const res = await axios.post('/api/upload', data,
+            );
+            console.log(res.data.links)
+            setImages(oldImages => {
+                return [...oldImages, ...res.data.links];
+            });
+            setIsUploading(false);
         }
     }
+
 
     function updateImagesOrder(images) {
         setImages(images)
@@ -107,13 +118,13 @@ export default function ProductForm({   _id,
     //     }
     // }
 
-    if (!title) {
-        return (
-            <div>
-                loading
-            </div>
-        )
-    }
+    // if (!title) {
+    //     return (
+    //         <div>
+    //             loading
+    //         </div>
+    //     )
+    // }
 
     return (
         <form onSubmit={saveProduct}>
@@ -148,7 +159,8 @@ export default function ProductForm({   _id,
                     Photos
                 </label>
                 <div className="mt2 flex justify-start items-center gap-4 h-full flex-wrap md:flex-nowrap">
-                    <ReactSortable className="flex items-center gap-2 flex-wrap md:flex-nowrap" list={images} setList={updateImagesOrder}>
+                    <ReactSortable className="flex items-center gap-2 flex-wrap md:flex-nowrap" list={images}
+                                   setList={updateImagesOrder}>
                         {!!images?.length ? images.map(link => (
                             <div key={link} className="w-auto h-24 flex p-2">
                                 <img className="h-full object-cover" src={link} alt="product img"/>
@@ -171,7 +183,7 @@ export default function ProductForm({   _id,
                             <path strokeLinecap="round" strokeLinejoin="round"
                                   d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15"/>
                         </svg>
-                        <input type="file" onChange={uploadImages} className="hidden"/>
+                        <input type="file" onChange={uploadImages} className="hidden" />
                     </label>
                 </div>
                 <label>Description</label>
@@ -181,7 +193,7 @@ export default function ProductForm({   _id,
                           onChange={el => setDescription(el.target.value)}></textarea>
                 <label>Price in (USD)</label>
                 <input className="mb-4" type="number" min="0" placeholder="Price" value={price}
-                       onChange={el => setPrice(el.target.value)}/>
+                       onChange={el => setPrice(Number(el.target.value))}/>
                 <button type="submit"
                         className="btn-primary">Save
                 </button>

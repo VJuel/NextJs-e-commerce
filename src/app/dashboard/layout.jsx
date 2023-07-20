@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Nav from "@/src/components/admin/Nav";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/src/lib/auth";

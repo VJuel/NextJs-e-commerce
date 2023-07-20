@@ -1,18 +1,20 @@
 'use client'
 import Image from 'next/image'
 import logo from '../../assets/moi.png'
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import ButtonLogoutFront from "@/src/components/front/button/ButtonLogoutFront";
 import {Theme, Button} from 'react-daisyui'
+import {CartContext} from "@/src/components/CartContext";
 
 export default function NavFront() {
-    const [theme, setTheme] = useState(typeof window !== 'undefined' && localStorage.getItem('theme') ? localStorage.getItem('theme') : 'corporate')
+    const [theme, setTheme] = useState( typeof window !== 'undefined' && localStorage.getItem('theme') ? localStorage.getItem('theme') : 'corporate')
     const {data: session, status} = useSession()
     const [navActive, setNavActive] = useState(true)
     const pathname = usePathname()
+    const {cartProducts} = useContext(CartContext)
     // const session = await getServerSession(authOptions);
     const inactiveLink = 'flex w-fit lg:text-white text-gray-600 whitespace-nowrap'
     const activeLink = inactiveLink + 'bg-white lg:bg-none [&>span]:inline-block [&>span]:text-gray-900 p-1 rounded-lg [&>svg]:stroke-primary lg:[&>svg]:stroke-current lg:[&>svg]:-mt-1'
@@ -85,7 +87,7 @@ export default function NavFront() {
         </button>
 
         <nav
-            className={`p-4 lg:navbar-center navbar-end w-1/2 md:w-1/3 ${!navActive ? 'block ' : 'hidden'} h-screen lg:h-auto lg:w-inherit lg:w-1/2 lg:bg-inherit bg-tertiary absolute lg:relative top-0 left-0 lg:flex lg:flex-row flex-col`}>
+            className={`z-10 p-4 lg:navbar-center navbar-end w-1/2 md:w-1/3 z-3 ${!navActive ? 'block ' : 'hidden'} h-screen lg:h-auto lg:w-inherit lg:w-1/2 lg:bg-white bg-secondary absolute lg:relative top-0 left-0 lg:flex lg:flex-row flex-col`}>
             <ul className="list-nav whitespace-nowrap menu menu-horizontal px-1 flex-col lg:flex-row w-full lg:flex-nowrap lg:w-fit">
                 <li><a href="/homepage" className="link-nav w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -108,13 +110,13 @@ export default function NavFront() {
                               d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"/>
                     </svg>
                     Categories</a></li>
-                <li><a className="flex link-nav w-full">
+                <li><a href="/homepage/cart" className="flex link-nav w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round"
                               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
                     </svg>
-                    Cart(0)</a></li>
+                    Cart({cartProducts?.length})</a></li>
                 <li tabIndex={0} className="link-nav">
                     <details>
                         <summary>
@@ -125,7 +127,7 @@ export default function NavFront() {
                             </svg>
                             Account
                         </summary>
-                        <ul className="drop p-2 w-full lg:w-auto bg-accent" data-theme="lighting">
+                        <ul className="drop p-2 w-full lg:w-auto bg-accent" data-theme="corporate">
                             <li><a>My account</a></li>
                             <li><ButtonLogoutFront/></li>
                         </ul>
@@ -148,5 +150,6 @@ export default function NavFront() {
                 </svg>
             </label>
         </div>
-    </header>)
+    </header>
+    )
 }

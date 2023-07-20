@@ -1,4 +1,4 @@
-import mongooseConnect from "@/src/lib/moongoose";
+import mongooseConnect from "@/src/lib/mongoose";
 import {Category} from "@/src/models/Category";
 import {NextResponse,NextRequest} from "next/server";
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import mongooseConnect from "@/src/lib/moongoose";
+import mongooseConnect from "@/src/lib/mongoose";
 import {Product} from "@/src/models/Product";
 import {NextResponse} from "next/server";
 
@@ -21,21 +21,26 @@ export async function GET () {
     }
 }
 
-//new
-// export async function POST (req, res) {
-//     await main()
-//     const {email} = await req.json();
-//     const productDoc = await Product.create({
-//         title, description, price, category, images
-//     })
-//     return NextResponse.json(productDoc)
-// }
+export async function POST (req, res) {
+    await main()
+    const {title, description, price, category, images} = await req.json();
+    const productDoc = await Product.create({
+        title, description, price, category, images
+    })
+    return NextResponse.json(productDoc)
+}
 
 export async function PUT(req, res) {
-    const {title, description, price, _id, category, images} = await req.json();
-    await Product.updateOne({_id}, {$set: {category: ''}})
-    await Product.updateOne({_id}, {title, description, price, category, images});
-    return NextResponse.json(Product)
+    const {title, description, price, id, category, images} = await req.json();
+    await Product.updateOne({_id: id}, {$set: {category: ''}})
+    const product = await Product.updateOne({_id: id}, {
+        title: title,
+        description: description,
+        price: price,
+        category: category,
+        images: images
+    });
+    return NextResponse.json(product)
 }
 
 

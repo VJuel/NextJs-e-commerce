@@ -5,6 +5,7 @@ export default function ButtonLogoutFront() {
 
     const router = useRouter()
     async function handleLogout() {
+        localStorage.removeItem('cart')
         await router.push('/signout')
     }
     return (

@@ -15,7 +15,7 @@ function Categories({swal}) {
     }, [])
 
     async function fetchCategories() {
-        await axios.get('/api/categories').then(result => {
+        await axios.get('/api/categories', { next: { revalidate: 10 } }).then(result => {
             setCategories(result.data)
         })
     }

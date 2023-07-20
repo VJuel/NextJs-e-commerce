@@ -1,13 +1,19 @@
 import Link from "next/link";
+import axios from "axios";
 
 export default async function Products() {
-    const res = await fetch("http://localhost:3000/api/products")
-    const productData = await res.json()
+
+    const productData = await axios.get('http://localhost:3000/api/products',{ next: { revalidate: 10 } })
+        .then(res => {
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
 
     return (
         <section>
             <h1 className="title-dashboard mb-2">Products</h1>
-
             <Link href="/dashboard/products/new"
                   className="btn-primary">
                 Add newproduct
@@ -20,12 +26,7 @@ export default async function Products() {
                 </tr>
                 </thead>
                 <tbody>
-                {/*{isUploading && (*/}
-                {/*    <div className="h-24 flex items-center">*/}
-                {/*        <ClipLoader color="#36d7b7"/>*/}
-                {/*    </div>*/}
-                {/*)}*/}
-                {productData?.map(product => (
+                {productData && productData.map(product => (
                     <tr key={product._id}>
                         <td className="w-1/2 pl-2">{product.title}</td>
                         <td className="p-2 flex gap-2 justify-end">
