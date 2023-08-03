@@ -22,7 +22,6 @@ export async function PUT(req, res) {
     await main()
     try {
         const {title, id, oldId} = await req.json()
-        console.log(oldId)
         if (oldId) {
             await Product.updateOne({ _id: oldId }, { $set: { featured: false } })
         }

@@ -9,11 +9,14 @@ export async function POST(req, res) {
         // Récupérer les identifiants depuis les données du panier
         const ids = await req.json();
 
+
         // Rechercher les produits correspondant aux identifiants dans la base de données
-        const data = await Product.find({ _id: ids });
+        const data = await Product.find({ _id: {$in:ids}});
+
 
         // Retourner les données en tant que réponse JSON
         return NextResponse.json(data);
+
     } catch (error) {
         console.log(error);
         // Gérer l'erreur et renvoyer une réponse appropriée si nécessaire

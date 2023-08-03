@@ -2,6 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 224 71.4% 4.1%;
+   
+      --muted: 220 14.3% 95.9%;
+      --muted-foreground: 220 8.9% 46.1%;
+   
+      --popover: 0 0% 100%;
+      --popover-foreground: 224 71.4% 4.1%;
+   
+      --card: 0 0% 100%;
+      --card-foreground: 224 71.4% 4.1%;
+   
+      --border: 220 13% 91%;
+      --input: 220 13% 91%;
+   
+      --primary: 220.9 39.3% 11%;
+      --primary-foreground: 210 20% 98%;
+   
+      --secondary: 220 14.3% 95.9%;
+      --secondary-foreground: 220.9 39.3% 11%;
+   
+      --accent: 220 14.3% 95.9%;
+      --accent-foreground: 220.9 39.3% 11%;
+   
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 20% 98%;
+   
+      --ring: 217.9 10.6% 64.9%;
+   
+      --radius: 0.5rem;
+    }
+   
+    .dark {
+      --background: 224 71.4% 4.1%;
+      --foreground: 210 20% 98%;
+   
+      --muted: 215 27.9% 16.9%;
+      --muted-foreground: 217.9 10.6% 64.9%;
+   
+      --popover: 224 71.4% 4.1%;
+      --popover-foreground: 210 20% 98%;
+   
+      --card: 224 71.4% 4.1%;
+      --card-foreground: 210 20% 98%;
+   
+      --border: 215 27.9% 16.9%;
+      --input: 215 27.9% 16.9%;
+   
+      --primary: 210 20% 98%;
+      --primary-foreground: 220.9 39.3% 11%;
+   
+      --secondary: 215 27.9% 16.9%;
+      --secondary-foreground: 210 20% 98%;
+   
+      --accent: 215 27.9% 16.9%;
+      --accent-foreground: 210 20% 98%;
+   
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 85.7% 97.3%;
+   
+      --ring: 215 27.9% 16.9%;
+    }
+  }
+   
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+  }
 
 body {
     margin: 0;
@@ -92,16 +166,15 @@ button, [type="button"] {
     @apply lg:pb-0 pb-4
 }
 
+.list-nav a {
+    @apply flex gap-2
+}
+
 .item-nav {
     /*@apply */
     @apply lg:w-fit
 }
 
-.link-nav {
-}
-.link-nav:hover {
-    @apply text-primary bg-hightDark
-}
 
 .link-nav svg {
     /*@apply stroke-primary*/
@@ -115,5 +188,55 @@ button, [type="button"] {
     @apply flex flex-wrap
 }
 .formPayement > input{
-    @apply mb-2 w-full
+    @apply mb-1 w-full
 }
+
+.parentSkeleton {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+  .skeleton {
+    background: #e1e1e1;
+    border-radius: 4px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton.big{
+    height: 150px;
+  }
+  
+  .skeleton::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #e8e8e8 50%,
+      transparent 100%
+    );
+    animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  
+  @keyframes load {
+    from {
+      left: -150px;
+    }
+    to {
+      left: 100%;
+    }
+  }
+  
+  tr > td {
+    @apply px-4
+  }

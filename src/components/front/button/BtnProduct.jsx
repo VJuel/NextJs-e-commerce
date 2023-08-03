@@ -1,4 +1,6 @@
+'use client'
 import styled from "styled-components";
+import Link from 'next/link'
 
 const ButtonContainerProduct = styled.button`
   display: flex;
@@ -21,10 +23,10 @@ const ButtonContainerProduct = styled.button`
   }
  
 `
-const BtnProduct = () => {
+const BtnProduct = ({featureId}) => {
     return (
         <ButtonContainerProduct>
-            <span>Readme more</span>
+            <Link href={`/homepage/products/${featureId}`}>Readme more</Link>
         </ButtonContainerProduct>
     );
 };

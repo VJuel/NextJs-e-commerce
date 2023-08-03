@@ -13,52 +13,15 @@ export const metadata = {
     descripton: 'Site E-commerce'
 }
 
-export default function RootLayout({children,}) {
+export default function RootLayout({children}) {
     //
     return (
         <html lang="fr" data-theme="corporate">
-        <Provider>
-            <body>
-            {children}
-            </body>
-        </Provider>
+            <Provider>
+                <body>
+                    {children}
+                </body>
+            </Provider>
         </html>
     )
 }
-
-
-//
-// function Auth({children}) {
-//     const {data: session, status} = useSession()
-//     const router = useRouter()
-//     const isUser = !!session?.user
-//     const isDashboardPage = useRouter().pathname.startsWith("/dashboard");
-//     const isUserAllowed = session?.user.role === "USER"; // Vérification du rôle de l'utilisateur
-//     const loading = status === "loading"
-//     const unauthenticated = status === "unauthenticated"
-//     const authenticated = status === "authenticated"
-//
-//     if (loading) {
-//         return (<div>LOADING...</div>)
-//     }
-//
-//     if (unauthenticated) {
-//         router.push('/signin')
-//     }
-//     if (session && session?.user?.role === "ADMIN") {
-//         router.push('/dashboard')
-//     }
-//     if (session && session?.user?.role === "USER") {
-//         router.push('/homepage')
-//     }
-// }
-
-// return (
-//     <SessionProvider session={session}>
-//         {isUserLoggedIn && (
-//             <Auth>
-//                 <Component {...pageProps} />
-//             </Auth>
-//         )}
-//     </SessionProvider>
-// )

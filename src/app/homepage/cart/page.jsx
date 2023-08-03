@@ -1,19 +1,20 @@
-'use client';
-import {useContext, useEffect, useState} from 'react';
+'use client'
+import { Suspense } from 'react'
+import {useEffect, useState, useContext} from "react"
 import {CartContext} from "@/src/components/CartContext";
 import axios from "axios";
-import FormPayement from "@/src/components/front/FormPayement";
+import Link from "next/link"
+import FormPayement from '@/src/components/front/FormPayement'
+import { CartTable } from "@/src/components/front/Cart"
 
-export default function Cart() {
-    const {cartProducts, addProduct, removeProduct} = useContext(CartContext)
-    const [loading, setLoading] = useState(false)
+export default function Page() {
+    const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext)
+    const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
-    const price = 'font-medium text-xl text-right grow'
-
+    const [isSucess, setIsSuccess] = useState(false)
 
     useEffect(() => {
         if (typeof window !== 'undefined' && cartProducts.length > 0) {
-            setLoading(true)
             axios.post('/api/cart', cartProducts)
                 .then(res => {
                     setProducts(res.data)
@@ -22,74 +23,52 @@ export default function Cart() {
                     console.log(err)
                 })
             setLoading(false)
+        } else {
+            setProducts([])
+            localStorage.removeItem('cart')
+            setLoading(false)
         }
     }, [cartProducts])
 
-    function totalCart() {
-        let total = 0
-        for (let productId of cartProducts) {
-            const price = products.find(product => product._id === productId)?.price || 0
-            total += price
+    useEffect(() => {
+        if (typeof window === 'undefined') {
+            return
         }
-        return total
-    }
+        if (typeof window !== "undefined" && window.location.href.includes('success')) {
+            setIsSuccess(true)
+            clearCart()
+        }
+    },[])
 
-    function moreOfThisProducts(id) {
-        addProduct(id)
-    }
-
-    function lessOfThisProducts(id) {
-        removeProduct(id)
-    }
-
-
+   
+      if (isSucess) {
+        return (
+            <>
+                <div className='w-full flex justify-start p-10'>
+                    <div className="flex flex-col w-fit rounded-md items-start justify-start shadow-md p-10">
+                        <h1 className='text-left mb-5 px-4 text-2xl font-bold'>Thanks you for your order</h1>
+                        <p>We will email you when your order wiell be sent</p>
+                        <Link href="/homepage">Go homepage</Link>
+                    </div>
+                </div>
+            </>
+        )
+      }
     return (
-        <section className="flex flex-col justify-center items-start py-10 w-full max-w-4xl bg-white m-auto">
+        <>
             <h1 className="text-left mb-5 px-4 text-2xl font-bold">Your Cart :</h1>
             <div className="flex flex-wrap lg:flex-nowrap md:flex-wrap px-4 w-full">
-
-                <div
-                    className="flex md:flex-wrap mb-6 lg:mb-0 lg:mr-6 w-full lg:w-[60%] rounded-xl shadow-xl bg-gray-100 p-4 flex-col">
-                    <table className="w-full">
-                        <tbody className="w-full">
-                        <tr className="flex justify-between items-center border-b border-black mb-2">
-                            <td className="w-1/3 font-medium">Product</td>
-                            <td className="w-1/3 pl-6 font-medium">Quantity</td>
-                            <td className="font-medium">Price</td>
-                        </tr>
-                        {products.length > 0 && products.map((product, index) => {
-                            return (
-                                <tr key={index} className="flex justify-between items-center mb-4">
-                                    <td className="w-1/2 flex flex-col -mr-4">
-                                        <div>{product.image ? product.image[0] : 'img'}</div>
-                                        <p className="title text-center">{product.title}</p>
-                                    </td>
-                                    <td className="flex items-center justify-center gap-2">
-                                        <button className="text-xl bg-gray-300 px-2 rounded-lg hover:bg-gray-400"
-                                                onClick={() => moreOfThisProducts(product._id)}>+
-                                        </button>
-                                        <span
-                                            className="rounded-lg bg-white p-2 min-w-[40px] text-center">{cartProducts ? cartProducts.filter(id => id === product._id).length : 1}</span>
-                                        <button className="text-xl bg-gray-300 px-2 rounded-lg hover:bg-gray-400"
-                                                onClick={() => lessOfThisProducts(product._id)}>-
-                                        </button>
-                                    </td>
-                                    <td className={price}>${cartProducts.filter(id => id === product._id).length * product.price}</td>
-                                </tr>
-                            )
-                        })}
-                        <tr className="flex justify-between items-center border-b border-black grow">
-                            <td className="text-xl font-medium">Total</td>
-                            <td className={price}>$ {totalCart()}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+            
+                <div className="flex w-full md:flex-wrap mb-6 lg:mb-0 lg:mr-6 lg:w-[60%] p-4 flex-col justify-start items-center h-auto">
+                    <CartTable products={products} loading={loading}/>
                 </div>
-
-                {products.length > 0 && <FormPayement/>}
-
-            </div>
-        < /section>
+                {cartProducts && 
+                    <aside className="flex flex-col flex-grow-1 w-auto sticky lg:w-1/3 rounded-xl shadow-xl bg-gray-100 p-4">
+                        <h2 className="mb-2 text-2xl font-bold">Order information</h2>
+                        <FormPayement loading={loading}/>
+                    </aside>}
+                </div>
+        </>
     );
 };
 

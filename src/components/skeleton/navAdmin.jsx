@@ -34,7 +34,7 @@ export default function NavBarAdminSkeleton({children}) {
                     </div>
                 </div>
                 <div
-                    className="lg:w-1/2 lg:flex-grow-0 bg-Gray flex-grow p-4 rounded-l-xl rounded-r-xl bg-white mt-2 mr-2">
+                    className="w-full lg:w-1/2 lg:flex-grow-0 bg-Gray flex-grow p-4 rounded-l-xl rounded-r-xl bg-white mt-2 mr-2">
                     {children}
                 </div>
             </div>

@@ -4,15 +4,15 @@ const ObjectId = require('mongoose').Types.ObjectId;
 // TODO A TEST
 // import { Suspense } from 'react'
 // <Suspense fallback={<p>Loading weather...</p>}>
-
-async function getData(id) {
-    const res = await fetch(`http://localhost:3000/api/products/${id}`)
-    return res.json()
+async function getOneProduct(id) {
+   
 }
 
-
 export default async function EditProductPage({params: {id}}) {
-    const productInfo = await getData(id)
+    const productInfo = await fetch(`http://localhost:3000/api/products/${id}`).then(res => {
+
+        return res.json()
+    })
 
     return (
         <>

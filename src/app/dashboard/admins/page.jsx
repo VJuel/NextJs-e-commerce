@@ -25,10 +25,7 @@ export default function Page() {
             id: idValue
         })
             .then(res => {
-                console.log(res.data)
                 setAdmins([...admins, res.data])
-                console.log('admins')
-                console.log(admins)
                 setEmailValue('')
                 setIdValue('')
             })
@@ -39,11 +36,9 @@ export default function Page() {
 
     const handleChangeEmail = (e) => {
         setEmailValue(e.target.value);
-        console.log(emailValue)
     };
     const handleChangeId = (e) => {
         setIdValue(e.target.value);
-        console.log(idValue)
     };
 
     return (

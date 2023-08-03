@@ -12,13 +12,15 @@ export default function Page() {
             router.push('/signin')
         }
         if (!loading && session) {
-            signOut({redirect: false})
+            signOut()
             router.push('/signin')
         }
 
     }, [session,loading])
 
     if (loading) {
-        return <div>Loading...</div>
+        return  <div className="w-full flex justify-center align-center h-full">
+                    Loading...
+                </div>
     }
 }

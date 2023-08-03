@@ -40,11 +40,11 @@ export async function POST(req, res) {
     try {
         const {name,parentCategory,propreties} = await req.json();
         const categoryDoc = await Category.create({
-            name,
+            name: name || undefined,
             parent: parentCategory || undefined,
-            propreties,
+            propreties: propreties || undefined,
         })
-        return new NextResponse.json(categoryDoc)
+        return new NextResponse(categoryDoc)
 
     } catch (err) {
         console.log(err)

@@ -8,6 +8,16 @@ const nextConfig = {
         appDir: true,
         serverComponentsExternalPackages: ["mongoose"]
     },
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'uploadthing.com',
+            port: '',
+            pathname: '/f/**',
+          },
+        ],
+      },
     async redirects() {
         return [
             {

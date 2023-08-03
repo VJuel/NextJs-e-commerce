@@ -1,4 +1,6 @@
 import NavFront from "@/src/components/front/NavFront";
+import { Toaster } from "@/src/components/ui/toaster"
+
 // import dynamic from "next/dynamic";
 // const NavFront = dynamic(() => import('@/src/components/front/NavFront'), {
 //     loading: () => <p>Loading...</p>,
@@ -37,6 +39,7 @@ export default function Layout({children}) {
             <main>
                 {children}
             </main>
+            <Toaster />
         </>
     )
 }

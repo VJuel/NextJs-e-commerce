@@ -31,7 +31,6 @@ export default function Page() {
             oldId: oldFeatured ? oldFeatured._id : undefined
         })
             .then(res => {
-                console.log('res', res.data)
                 setNewFeatured(res.data)
                 setProductName('')
                 setIdValue('')

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import axios from "axios";
 
-export default async function Products() {
+export default async function Page() {
 
     const productData = await axios.get('http://localhost:3000/api/products',{ next: { revalidate: 10 } })
         .then(res => {

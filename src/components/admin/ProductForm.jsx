@@ -4,6 +4,9 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {ClipLoader} from "react-spinners";
 import {ReactSortable} from "react-sortablejs";
+import "@uploadthing/react/styles.css";
+import { useUploadThing } from "@/utils/uploadthing";
+import { UploadButton } from "@/utils/uploadthing";
 
 const mongoose = require('mongoose');
 
@@ -56,75 +59,22 @@ export default function ProductForm({
         }
     }
 
+    function setImageUrl(url) {
+        setImages(oldImages => {
+            return [...oldImages, url]
+          }
+        )
+    }
+
     async function saveProduct(e) {
         e.preventDefault()
         await isValidObjectId(_id)
-        await router.push('/dashboard/products')
+        router.push('/dashboard/products')
     }
-
-    async function uploadImages(ev) {
-        console.log(ev)
-        const value = URL.createObjectURL(ev.target.files[0]).substr(5)
-        const files = ev.target?.files;
-        if (files?.length > 0) {
-            setIsUploading(true);
-            const data = new FormData();
-            for (const file of files) {
-                file.path = value
-                data.append('file', file);
-                console.log(data.get('file'))
-                // data.set("webkitRelativePath", file, window.URL.createObjectURL(file));
-            }
-            const res = await axios.post('/api/upload', data,
-            );
-            console.log(res.data.links)
-            setImages(oldImages => {
-                return [...oldImages, ...res.data.links];
-            });
-            setIsUploading(false);
-        }
-    }
-
 
     function updateImagesOrder(images) {
         setImages(images)
     }
-
-    // function setProductProps(propName, value) {
-    //     setProductProperties(prev => {
-    //         const newProductProps = {...prev}
-    //         newProductProps[propName] = value;
-    //         return newProductProps
-    //     })
-    // }
-
-    //TODO PROPRETIES CAN CHANGE IN PRODUCT/EDIT
-
-    // console.log(category)
-    // console.log(categories[0]?.name)
-    // console.log(categories[0].id)
-    // let catInfo = categories.find(({_id}) => _id === categories);
-    // console.log({catInfo})
-    //
-    // const propretiesToFill = [];
-    // if (categories.length > 0 && category) {
-    //     console.log(categories.find(({el}) => _id === category))
-    //     propretiesToFill.push(...catInfo?.propreties);
-    //     while (catInfo?.parent?._id) {
-    //         const parentCat = categories.find(({_id}) => _id === catInfo?.parent?._id);
-    //         propretiesToFill.push(...parentCat.propreties);
-    //         console.log(propretiesToFill);
-    //         catInfo = parentCat;
-    //     }
-    // }
-
-    // if (!title) {
-    //     return (
-    //         <div>
-    //             loading
-    //         </div>
-    //     )
-    // }
 
     return (
         <form onSubmit={saveProduct}>
@@ -144,17 +94,6 @@ export default function ProductForm({
                         </option>
                     ))}
                 </select>
-                {/*{propretiesToFill.length > 0 && propretiesToFill.map(p => (*/}
-                {/*    <div className="flex gap-1">*/}
-                {/*        <div>{p.name}</div>*/}
-                {/*        <select onChange={ev =>*/}
-                {/*            setProductProps(p.name, ev.target.value)}>*/}
-                {/*            {p.values.map(v => (*/}
-                {/*                <option value={v}>{v}</option>*/}
-                {/*            ))}*/}
-                {/*        </select>*/}
-                {/*    </div>*/}
-                {/*))}*/}
                 <label>
                     Photos
                 </label>
@@ -174,17 +113,21 @@ export default function ProductForm({
                             <ClipLoader color="#36d7b7"/>
                         </div>
                     )}
-                    <label
-                        className="bg-gray-200 w-1/3 flex items-center justify-center rounded-lg py-10 cursor-pointer border-gray-600 border-2 gap-2"
-                    >
-                        <span className="">Upload</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                             stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15"/>
-                        </svg>
-                        <input type="file" onChange={uploadImages} className="hidden" />
-                    </label>
+                    
+                    <UploadButton   endpoint="imageUploader"
+                                    onUploadProgress={(res) => {
+                                        setIsUploading(true)
+                                }}
+                                    onClientUploadComplete={(res) => {
+                                        setIsUploading(false)
+                                        const newUrl = res[0].fileUrl
+                                        return setImageUrl(newUrl)
+                                }}
+                            onUploadError={(error) => {
+                            // Do something with the error.
+                            alert(`ERROR! ${error.message}`);
+                            }}
+                    />
                 </div>
                 <label>Description</label>
                 <textarea name="description"
