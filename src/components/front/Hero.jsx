@@ -31,6 +31,7 @@ export default async function Hero() {
                 width={200}
                 height={200}
                 loadder={<FeatureImgSkelton/>}
+                className="rounded-sm shadow-lg"
             />
         )
     }

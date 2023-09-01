@@ -1,6 +1,7 @@
 import {Product} from "@/src/models/Product";
 import {NextResponse} from "next/server";
 import mongooseConnect from "@/src/lib/mongoose";
+
 async function main() {
     try {
         await mongooseConnect()

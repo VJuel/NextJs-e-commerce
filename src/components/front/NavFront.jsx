@@ -94,7 +94,7 @@ export default function NavFront() {
         </button>
 
         <nav
-            className={`lg:w-auto z-20 p-4 lg:flex-row flex-col w-1/2 md:w-1/3 z-3 lg:flex ${!navActive ? 'flex ' : 'hidden'} h-screen lg:h-auto bg-slate-700 absolute lg:relative top-0 left-0 lg:flex-row justify-start lg:justify-end`}>
+            className={`lg:w-auto z-20 p-4 lg:flex-row flex-col w-1/2 md:w-1/3 z-3 lg:flex ${!navActive ? 'flex ' : 'hidden'} h-screen z-20 lg:h-auto bg-slate-700 absolute lg:relative top-0 left-0 lg:flex-row justify-start lg:justify-end`}>
             <ul className="items-start list-nav whitespace-nowrap px-1 flex flex-col lg:flex-row w-full lg:flex-nowrap lg:w-fit lg:items-center gap-4">
                 <li><a href="/homepage" className="link-nav w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -110,7 +110,7 @@ export default function NavFront() {
                               d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
                     </svg>
                     Products</a></li>
-                <li><a className={`link-nav w-full`}>
+                <li><a href="/homepage/categories" className={`link-nav w-full`}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round"

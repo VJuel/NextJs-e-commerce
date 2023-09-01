@@ -45,7 +45,9 @@ npm install
 Créez un fichier .env.local à la racine du projet et ajoutez les variables suivantes :
 
 #### MongoDB
-MONGODB_URI
+-> DataBase name : USERNAME
+-> DataBase password : PASSWORD
+-> DataBase URI : MONGODB_URI
 
 ### #GOOGLE AUTH
 GOOGLE_CLIENT_ID
@@ -70,4 +72,4 @@ L'application sera accessible à l'adresse http://localhost:3000.
 Ce projet est développé et maintenu par Vicktor Juhel.
 
 ```shell
-git clone https://github.com/votre-utilisateur/votre-projet.git
+git clone https://github.com/VJUEL/votre-projet.git

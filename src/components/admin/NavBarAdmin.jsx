@@ -13,7 +13,7 @@ export default function NavBarAdmin({navActive, handleNavActiveChange}) {
 
     return (
         <aside
-            className={`text-gray-500 px-2 py-6 ${pathname.includes('/categories') ? 'h-full' : 'h-[calc(100vh-56px)]'} bg-Gray md:px-4 md:py-4 fixed ${!navActive ? '-left-1/2 hidden' : 'block left-0'} md:left-auto md:h-screen md:relative md:block bg-gray-200 md:w-auto w-1/2 transition-all duration-600`}>
+            className={`text-gray-500 px-2 py-6 ${pathname.includes('/categories') ? 'h-full' : 'h-[calc(100vh-56px)]'} bg-Gray md:px-4 md:py-4 fixed ${!navActive ? '-left-1/2 hidden' : 'block left-0'} md:left-auto md:h-auto min-h-screen md:relative md:block bg-gray-200 md:w-auto w-1/2 transition-all duration-600`}>
             <Link as="style" href="/dashboard" className="hidden md:flex gap-4 items-center mb-4 mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                      stroke="currentColor" className="w-6 h-6">

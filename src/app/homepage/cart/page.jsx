@@ -48,7 +48,11 @@ export default function Page() {
                     <div className="flex flex-col w-fit rounded-md items-start justify-start shadow-md p-10">
                         <h1 className='text-left mb-5 px-4 text-2xl font-bold'>Thanks you for your order</h1>
                         <p>We will email you when your order wiell be sent</p>
-                        <Link href="/homepage">Go homepage</Link>
+                        <Link href="/homepage" className='font-semibold underline'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                            </svg>
+                            Go homepage
+                        </Link>
                     </div>
                 </div>
             </>
@@ -62,7 +66,7 @@ export default function Page() {
                 <div className="flex w-full md:flex-wrap mb-6 lg:mb-0 lg:mr-6 lg:w-[60%] p-4 flex-col justify-start items-center h-auto">
                     <CartTable products={products} loading={loading}/>
                 </div>
-                {cartProducts && 
+                {cartProducts.length > 0 && 
                     <aside className="flex flex-col flex-grow-1 w-auto sticky lg:w-1/3 rounded-xl shadow-xl bg-gray-100 p-4">
                         <h2 className="mb-2 text-2xl font-bold">Order information</h2>
                         <FormPayement loading={loading}/>

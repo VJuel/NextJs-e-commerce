@@ -1,5 +1,5 @@
-import mongooseConnect from "@/src/lib/mongoose";
 import {Category} from "@/src/models/Category";
+import mongooseConnect from "@/src/lib/mongoose";
 import {NextResponse,NextRequest} from "next/server";
 
 

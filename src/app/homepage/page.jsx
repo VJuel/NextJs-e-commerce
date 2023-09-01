@@ -1,5 +1,5 @@
 import Hero from "../../components/front/Hero";
-import {Products} from "@/src/components/front/Products";
+import {ProductsHome} from "@/src/components/front/ProductsHome";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/src/lib/auth";
 import { redirect } from "next/dist/server/api-utils";
@@ -17,7 +17,7 @@ export default async function Homepage() {
         <>
             <Hero/>
             <div className="bg-slate-950">
-                <Products/>
+                <ProductsHome/>
             </div>
         </>
     )

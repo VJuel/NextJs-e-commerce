@@ -35,25 +35,15 @@ export const authOptions = {
         }),
     ],
     callbacks: {
-        async session({token, session}) {
-            if (!token) {
-                session.user.id = "loading"
-                return session
-            }
-            if (token) {
-                session.user.id = token.id
-                session.user.name = token.name
-                session.user.email = token.email
-                session.user.role = token.role
-            }
-            return session
-        },
         async jwt({token, user}) {
+            // function si il n'y a pas de token
+        
             const dbUser = await db.user.findFirst({
                 where: {
                     email: token.email
                 }
             });
+
 
             if (!dbUser) {
                 token.id = user?.id
@@ -67,6 +57,19 @@ export const authOptions = {
                 email: dbUser.email,
                 picture: dbUser.picture,
             }
+        },
+        async session({token, session}) {
+            if (!token) {
+                session.user.id = "loading"
+                return session
+            }
+            if (token) {
+                session.user.id = token.id
+                session.user.name = token.name
+                session.user.email = token.email
+                session.user.role = token.role
+            }
+            return session
         },
     },
 }

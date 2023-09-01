@@ -181,7 +181,7 @@ button, [type="button"] {
 }
 
 .btn {
-    @apply flex justify-center flex-wrap items-center
+    @apply flex justify-center items-center
 }
 
 .formPayement {
@@ -189,6 +189,10 @@ button, [type="button"] {
 }
 .formPayement > input{
     @apply mb-1 w-full
+}
+
+.card-title {
+  @apply text-xl font-bold
 }
 
 .parentSkeleton {
@@ -239,4 +243,29 @@ button, [type="button"] {
   
   tr > td {
     @apply px-4
+  }
+
+  .absolute-translate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .slick-slider {
+    @apply w-full max-w-5xl mx-auto px-5 flex justify-center items-center
+  }
+  .slick-track  {
+    @apply !w-full
+  }
+  .slick-track > :not(:last-child) {
+    @apply mb-10
+  }
+
+  .slick-slide {
+    @apply !w-full flex justify-center items-center
+  }
+
+  .slick-slide >  div {
+    @apply !w-full h-full flex justify-center items-center
   }

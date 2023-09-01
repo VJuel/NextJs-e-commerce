@@ -4,7 +4,6 @@ export {default} from 'next-auth/middleware'
 
 export default withAuth(
     function middlewaree(req) {
-        console.log(req.nexthauth.token)
     },
         {
             callback: {

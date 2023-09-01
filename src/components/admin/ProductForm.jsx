@@ -7,6 +7,7 @@ import {ReactSortable} from "react-sortablejs";
 import "@uploadthing/react/styles.css";
 import { useUploadThing } from "@/utils/uploadthing";
 import { UploadButton } from "@/utils/uploadthing";
+import { utapi } from "uploadthing/server";
 
 const mongoose = require('mongoose');
 
@@ -76,6 +77,16 @@ export default function ProductForm({
         setImages(images)
     }
 
+   //  async function deleteImage(imageSrc) {
+      //  await utapi.deleteFiles(imageSrc);
+    //}
+
+    async function uploadFiles(formData) {
+        const files = fd.getAll("files");
+        const response = await utapi.uploadFiles(files);
+        //    ^? { key: string, url: string }[]
+      }
+
     return (
         <form onSubmit={saveProduct}>
             <div className="flex flex-col">
@@ -101,8 +112,15 @@ export default function ProductForm({
                     <ReactSortable className="flex items-center gap-2 flex-wrap md:flex-nowrap" list={images}
                                    setList={updateImagesOrder}>
                         {!!images?.length ? images.map(link => (
-                            <div key={link} className="w-auto h-24 flex p-2">
-                                <img className="h-full object-cover" src={link} alt="product img"/>
+                            //TODO: delete image
+                            <div key={link} onClick={() => deleteImage(link)}
+                                            className="transition-all relative w-fit h-24 flex [&>div]:hover:flex [&>div]:hover:h-full cursor-pointer radius-xs overflow-hidden">
+                                <img className="h-full object-cover w-full" src={link} alt="product img"/>
+                                <div className={`z-1 absolute justify-center items-center w-full bg-red-400 opacity-30 h-0 hover:h-full hover cursor-pointer hidden`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" class="-transform-x-1/2 -transform-y-1/2 w-10 h-10 z-10 absolute-translate">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
                             </div>
                         )) : (
                             <div className="mt-4">No photos in this product</div>
