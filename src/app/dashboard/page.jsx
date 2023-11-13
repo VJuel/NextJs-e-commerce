@@ -1,48 +1,100 @@
-import Image from "next/image";
-import logo from "../../assets/moi.png";
-import {redirect} from "next/navigation";
-import {getServerSession} from "next-auth/next";
-import {authOptions} from "@/src/lib/auth";
+import Image from "next/image"
+import logo from "../../assets/moi.png"
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/src/lib/auth"
+import axios from "redaxios"
+import CardDetails from "@/src/components/admin/Card"
+import { Skeleton } from "@/src/components/ui/skeleton"
+import { Suspense } from "react"
 
-// Dashboard.auth = {
-//     role: "admin",
-//     // loading: <AdminLoadingSkeleton />,
-//     unauthorized: "/homepage", // redirect to this url
-// }
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/src/components/ui/card"
 
 export default async function Dashboard() {
-    const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions)
 
-    if (!session) {
-        redirect('/signin')
-    }
+  const productData = await axios
+    .get("http://localhost:3000/api/products", { next: { revalidate: 30 } })
+    .then((res) => {
+      return res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 
-    if (session && session?.user?.role === 'USER') {
-        return redirect('/homepage')
-    }
+  if (!session) {
+    redirect("/signin")
+  }
 
-    const MyLogo = (props) => {
-        return (
-            <Image
-                src={logo}
-                alt="Photo de l'auteur"
-                width="50"
-                height="50"
-            />
-        )
-    }
+  if (session && session?.user?.role === "USER") {
+    return redirect("/homepage")
+  }
 
+  function camelCase(string) {
+    return string.toLowerCase().replace(/(?:^|\s)\w/g, function (match) {
+      return match.toUpperCase()
+    })
+  }
+
+  const MyLogo = (width, height) => {
+    return <Image src={logo} alt="Photo de l'auteur" width="80" height="80" />
+  }
+
+  const Loading = () => {
     return (
-            <div className="text-blue-800 flex justify-between items-center">
-                <div className="font-semibold text-lg">Hello, {session?.user?.name}</div>
-                <div className="flex bg-gray-200 items-center justify-center gap-4">
-                    {session?.user?.image ? (
-                        <img className="w-10" src={session?.user?.image} alt="vicktor juhel"/>
-                    ) : (
-                        <MyLogo/>
-                    )}
-                    <span className="pr-3">{session?.user?.name}</span>
-                </div>
-            </div>
+      <div className="flex items-center space-x-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px]" />
+          <Skeleton className="h-4 w-[200px]" />
+        </div>
+      </div>
     )
+  }
+
+  return (
+    <div className="text-blue-800 flex flex-col gap-6">
+      <div className="flex justify-start items-start md:justify-between md:items-center flex-col md:flex-row">
+        <div className="font-semibold text-lg">
+          Hello{" "}
+          {(session?.user?.name !== null && camelCase(session?.user?.name)) ||
+            ""}
+        </div>
+        <div className="flex md:bg-gray-200 bg-none md:items-center md:justify-center gap-4 flex-col md:flex-row justify-start items-start">
+          {session?.user?.image ? (
+            <img
+              className="w-10"
+              src={session?.user?.image}
+              alt={session?.user?.name}
+            />
+          ) : (
+            <MyLogo />
+          )}
+          <span className="pr-3 font-semibold text-lg">
+            {session?.user?.email}
+          </span>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* products */}
+        <Suspense fallback={<Loading />}>
+          <CardDetails type="products" />
+        </Suspense>
+
+        {/* revenu */}
+        <CardDetails type="Revenue" />
+
+        {/* Orders */}
+        <CardDetails type="Orders" />
+      </div>
+    </div>
+  )
 }

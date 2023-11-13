@@ -3,269 +3,421 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 224 71.4% 4.1%;
-   
-      --muted: 220 14.3% 95.9%;
-      --muted-foreground: 220 8.9% 46.1%;
-   
-      --popover: 0 0% 100%;
-      --popover-foreground: 224 71.4% 4.1%;
-   
-      --card: 0 0% 100%;
-      --card-foreground: 224 71.4% 4.1%;
-   
-      --border: 220 13% 91%;
-      --input: 220 13% 91%;
-   
-      --primary: 220.9 39.3% 11%;
-      --primary-foreground: 210 20% 98%;
-   
-      --secondary: 220 14.3% 95.9%;
-      --secondary-foreground: 220.9 39.3% 11%;
-   
-      --accent: 220 14.3% 95.9%;
-      --accent-foreground: 220.9 39.3% 11%;
-   
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 20% 98%;
-   
-      --ring: 217.9 10.6% 64.9%;
-   
-      --radius: 0.5rem;
-    }
-   
-    .dark {
-      --background: 224 71.4% 4.1%;
-      --foreground: 210 20% 98%;
-   
-      --muted: 215 27.9% 16.9%;
-      --muted-foreground: 217.9 10.6% 64.9%;
-   
-      --popover: 224 71.4% 4.1%;
-      --popover-foreground: 210 20% 98%;
-   
-      --card: 224 71.4% 4.1%;
-      --card-foreground: 210 20% 98%;
-   
-      --border: 215 27.9% 16.9%;
-      --input: 215 27.9% 16.9%;
-   
-      --primary: 210 20% 98%;
-      --primary-foreground: 220.9 39.3% 11%;
-   
-      --secondary: 215 27.9% 16.9%;
-      --secondary-foreground: 210 20% 98%;
-   
-      --accent: 215 27.9% 16.9%;
-      --accent-foreground: 210 20% 98%;
-   
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 85.7% 97.3%;
-   
-      --ring: 215 27.9% 16.9%;
-    }
-  }
-   
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --ring: 217.9 10.6% 64.9%;
+
+    --radius: 0.5rem;
   }
 
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --ring: 215 27.9% 16.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-size: 16px
+  font-size: 16px;
 }
 
-input, textarea, select {
-    @apply border-2 border-gray-200 px-2 rounded-lg
+input,
+textarea,
+select {
+  @apply border-2 border-gray-200 px-2 rounded-lg;
 }
 
-input:focus, textarea :focus,
-input:active, textarea :active,
-select:active, select :active {
-    @apply border-blue-800 outline-blue-800
+input:focus,
+textarea :focus,
+input:active,
+textarea :active,
+select:active,
+select :active {
+  @apply border-blue-800 outline-blue-800;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
+}
+
+.calcheight {
+  height: calc(100vh - 80px);
 }
 
 nav a {
-    @apply p-1
+  @apply p-1;
 }
 
 label {
-    @apply text-blue-800 mt-2
+  @apply text-blue-800 mt-2;
 }
 
 .title-dashboard {
-    @apply text-xl
+  @apply text-xl;
 }
 
 .black {
-    background: #222;
+  background: #222;
 }
 
 .header {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    height: 80px;
-    background: white;
-    z-index: 30;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 80px;
+  background: white;
+  z-index: 30;
 }
 
 .btn-primary {
-    @apply flex border border-gray-200 text-gray-600 bg-white w-fit px-4 py-2 gap-2 shadow-sm
+  @apply flex border border-gray-200 text-gray-600 bg-white w-fit px-4 py-2 gap-2 shadow-sm;
 }
 
 .btn-secondary {
-    @apply flex bg-red-200 h-full px-4 py-2 text-red-500 w-fit gap-2 shadow-sm
+  @apply flex bg-red-200 h-full px-4 py-2 text-red-500 w-fit gap-2 shadow-sm;
 }
 
 .btn-default {
-    @apply flex bg-gray-500 px-2 py-1 w-fit gap-2 rounded-lg text-white
+  @apply flex bg-gray-500 px-2 py-1 w-fit gap-2 rounded-lg text-white;
 }
 
 .basic {
-    @apply mt-5 w-full
+  @apply mt-5 w-full;
 }
 
 .basic tbody tr {
-    border: 1px solid #c2bfc7;
+  border: 1px solid #c2bfc7;
 }
 
 .basic thead tr td {
-    @apply text-gray-400 px-2 py-1 border-none
+  @apply text-gray-400 px-2 py-1 border-none;
 }
 
 .table-skelton tbody tr td {
-    @apply bg-gray-200 border-2 border-gray-400 animate-bounce
+  @apply bg-gray-200 border-2 border-gray-400 animate-bounce;
 }
 
 .btn-delete {
-    @apply px-4 py-2 rounded-lg text-white text-lg min-w-[60px]
+  @apply px-4 py-2 rounded-lg text-white text-lg min-w-[60px];
 }
 
-button, [type="button"] {
-    @apply bg-auto
+button,
+[type="button"] {
+  @apply bg-auto;
 }
 
-.list-nav li:not(:last-child ) {
-    @apply lg:pb-0 pb-4
+.list-nav li:not(:last-child) {
+  @apply lg:pb-0 pb-4;
 }
 
 .list-nav a {
-    @apply flex gap-2
+  @apply flex gap-2;
 }
 
 .item-nav {
-    /*@apply */
-    @apply lg:w-fit
+  /*@apply */
+  @apply lg:w-fit;
 }
 
-
 .link-nav svg {
-    /*@apply stroke-primary*/
+  /*@apply stroke-primary*/
 }
 
 .btn {
-    @apply flex justify-center items-center
+  @apply flex justify-center items-center;
 }
 
 .formPayement {
-    @apply flex flex-wrap
+  @apply flex flex-wrap;
 }
-.formPayement > input{
-    @apply mb-1 w-full
+.formPayement > input {
+  @apply mb-1 w-full;
 }
 
 .card-title {
-  @apply text-xl font-bold
+  @apply text-xl font-bold;
 }
 
 .parentSkeleton {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
-  .skeleton {
-    background: #e1e1e1;
-    border-radius: 4px;
-    height: 50px;
-    position: relative;
-    overflow: hidden;
-  }
+.skeleton {
+  background: #e1e1e1;
+  border-radius: 4px;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .skeleton.big{
-    height: 150px;
-  }
-  
-  .skeleton::before {
-    content: "";
-    display: block;
-    position: absolute;
+.skeleton.big {
+  height: 150px;
+}
+
+.skeleton::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -150px;
+  top: 0;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #e8e8e8 50%,
+    transparent 100%
+  );
+  animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes load {
+  from {
     left: -150px;
-    top: 0;
-    height: 100%;
-    width: 150px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      #e8e8e8 50%,
-      transparent 100%
-    );
-    animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
-  
-  @keyframes load {
-    from {
-      left: -150px;
-    }
-    to {
-      left: 100%;
-    }
+  to {
+    left: 100%;
   }
-  
-  tr > td {
-    @apply px-4
-  }
+}
 
-  .absolute-translate {
-    position: absolute;
+tr > td {
+  @apply px-4;
+}
+
+.absolute-translate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.slick-slider {
+  height: 100%;
+  width: 100%;
+}
+
+.slick-slider .slick-list {
+  margin: 0;
+  height: 100%;
+}
+
+.slick-slider .slick-list .slick-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.slick-slider .slick-arrow {
+  background: black;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  padding: 11px 30px;
+  cursor: pointer;
+  text-indent: -9999px;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 4;
+  border: none;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: $screen-md-max) {
+  .slick-slider .slick-arrow {
+    right: 20px;
+  }
+}
+
+@media only screen and (max-width: $screen-xs-max) {
+  .slick-slider .slick-arrow {
+    right: 15px;
+    top: 45%;
+  }
+}
+
+.slick-slider .slick-arrow:before,
+.slick-slider .slick-arrow:after {
+  border-right: 2px solid white;
+  content: "";
+  display: block;
+  height: 16px;
+  margin-top: -12px;
+  position: absolute;
+  transform: rotate(125deg);
+  right: 30px;
+  top: 53%;
+  width: 0;
+}
+
+.slick-slider .slick-arrow:after {
+  margin-top: -3px;
+  transform: rotate(55deg);
+}
+
+.slick-slider .slick-arrow.slick-prev {
+  right: unset;
+  left: 30px;
+}
+
+@media only screen and (max-width: $screen-md-max) {
+  .slick-slider .slick-arrow.slick-prev {
+    left: 20px;
+  }
+}
+
+@media only screen and (max-width: $screen-xs-max) {
+  .slick-slider .slick-arrow.slick-prev {
+    left: 15px;
+  }
+}
+
+.slick-slider .slick-arrow.slick-prev:before {
+  transform: rotate(55deg);
+}
+
+.slick-slider .slick-arrow.slick-prev:after {
+  transform: rotate(125deg);
+}
+
+.slick-slider .slick-arrow.slick-next:before,
+.slick-slider .slick-arrow.slick-next:after {
+  right: 27px;
+}
+
+.slick-slider .slick-arrow.arrow-white:before,
+.slick-slider .slick-arrow.arrow-white:after {
+  border-right: 2px solid white;
+}
+
+.slick-slider.slick-hero .slick-arrow {
+  top: 400px;
+  transform: unset;
+}
+
+@media only screen and (max-width: $screen-md-max) {
+  .slick-slider.slick-hero .slick-arrow {
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
   }
+}
 
-  .slick-slider {
-    @apply w-full max-w-5xl mx-auto px-5 flex justify-center items-center
-  }
-  .slick-track  {
-    @apply !w-full
-  }
-  .slick-track > :not(:last-child) {
-    @apply mb-10
-  }
+.slick-dots {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
 
-  .slick-slide {
-    @apply !w-full flex justify-center items-center
-  }
+.slick-dots li {
+  margin-right: 15px;
+}
 
-  .slick-slide >  div {
-    @apply !w-full h-full flex justify-center items-center
+@media only screen and (max-width: 768px) {
+  .slick-dots li {
+    margin-right: 10px;
   }
+}
+
+@media only screen and (max-width: 640px) {
+  .slick-dots li {
+    margin-right: 5px;
+  }
+}
+
+.slick-dots li:last-child {
+  margin-right: 0;
+}
+
+.slick-dots li button {
+  display: flex;
+  background: none;
+  border: 1px solid blue;
+  text-indent: -1000px;
+  overflow: hidden;
+  width: 12px !important;
+  height: 14px !important;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: $screen-xs-max) {
+  .slick-dots li button {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+.slick-dots li.slick-active button {
+  background: blue;
+}

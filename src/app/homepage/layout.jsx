@@ -1,12 +1,10 @@
-import NavFront from "@/src/components/front/NavFront";
-import { Toaster } from "@/src/components/ui/toaster"
+import NavFront from "@/src/components/front/NavFront"
 
 // import dynamic from "next/dynamic";
 // const NavFront = dynamic(() => import('@/src/components/front/NavFront'), {
 //     loading: () => <p>Loading...</p>,
 //     ssr: false,
 // })
-
 
 //meta
 // import { Metadata } from 'next'
@@ -20,26 +18,11 @@ import { Toaster } from "@/src/components/ui/toaster"
 //     description: 'Awesome E-commerce website',
 // }
 
-export default function Layout({children}) {
-    // const session = await getServerSession({req, ...authOptions})
-    // const status = session.status
-    // const loading = status === 'loading'
-
-    // if (loading) {
-    //     return (
-    //         <div className="flex justify-center items-center h-screen">
-    //             {/*<Loader size="md" />*/}
-    //         </div>
-    //     )
-    // }
-
-    return (
-        <>
-            <NavFront/>
-            <main>
-                {children}
-            </main>
-            <Toaster />
-        </>
-    )
+export default function Layout({ children }) {
+  return (
+    <>
+      <NavFront />
+      <main>{children}</main>
+    </>
+  )
 }
