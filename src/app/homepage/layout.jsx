@@ -1,4 +1,6 @@
 import NavFront from "@/src/components/front/NavFront"
+import { authOptions } from "@/src/lib/auth"
+import { getServerSession } from "next-auth"
 
 // import dynamic from "next/dynamic";
 // const NavFront = dynamic(() => import('@/src/components/front/NavFront'), {
@@ -18,10 +20,12 @@ import NavFront from "@/src/components/front/NavFront"
 //     description: 'Awesome E-commerce website',
 // }
 
-export default function Layout({ children }) {
+export default async function Layout({ children }) {
+  const session = await getServerSession(authOptions)
+
   return (
     <>
-      <NavFront />
+      <NavFront session={session} />
       <main>{children}</main>
     </>
   )

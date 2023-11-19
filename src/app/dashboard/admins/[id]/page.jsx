@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from "react"
 import axios from "redaxios"
 import { useParams, useRouter } from "next/navigation"
+import { HandleToastError } from "@/src/components/Toast"
 
 export default function DeleteAdminPage() {
   const [user, setUser] = useState({})
+  const [error, setError] = useState(null)
   const router = useRouter()
   const { id } = useParams()
 
@@ -12,14 +14,33 @@ export default function DeleteAdminPage() {
     axios.get(`/api/admins/` + id).then((res) => {
       setUser(res.data)
     })
-  }, [])
+  }, [id])
 
   function goBack() {
     router.push("/dashboard/admins")
   }
   async function deleteAdmin() {
-    await axios.put(`/api/admins/` + id)
-    goBack()
+    try {
+      const res = await axios.put(`/api/admins/` + id)
+      if (res?.status > 400) {
+        throw new Error(
+          "Une erreur s'est produite lors de la suppression de l'administrateur"
+        )
+      }
+      setAdmins([...admins, res.data])
+      setEmailValue("")
+      goBack()
+    } catch (err) {
+      setError(err)
+    }
+  }
+
+  if (error) {
+    return (
+      <>
+        <HandleToastError />
+      </>
+    )
   }
 
   return (

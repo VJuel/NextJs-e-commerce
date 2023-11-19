@@ -2,6 +2,7 @@
 import { useEffect, useState, useContext } from "react"
 import { CartContext } from "@/src/components/CartContext"
 import CartSkeleton from "@/src/components/skeleton/CartSkeleton"
+import Image from "next/image"
 import clsx from "clsx"
 
 export const CartTable = ({ products, loading }) => {
@@ -55,7 +56,9 @@ export const CartTable = ({ products, loading }) => {
                   className="flex justify-between items-center mb-4"
                 >
                   <td className="w-1/3 flex flex-col -mr-4">
-                    <img
+                    <Image
+                      width={100}
+                      height={100}
                       className="objectif-cover w-full"
                       src={product?.images[0]}
                       alt="yes work"

@@ -2,11 +2,9 @@ import { device } from "@/styles/abstract"
 import mac from "../../assets/macbookpro.png"
 import Image from "next/image"
 import axios from "redaxios"
-import BtnProduct from "@/src/components/front/button/BtnProduct"
+import BtnReadMore from "@/src/components/front/button/BtnReadMore"
 import { BtnAddToCartPrimary } from "@/src/components/front/button/BtnAddToCart"
 import FeatureImgSkelton from "@/src/components/skeleton/FeatureImgSkeleton"
-// import BtnAddToCart from "../../components/front/button/BtnAddToCart";
-// import BtnProduct from "../../components/front/button/BtnProduct";
 
 export async function getFeatures() {
   try {
@@ -51,7 +49,7 @@ export default async function Hero() {
                 {feature[0].description}
               </p>
               <div className="flex items-center justify-start gap-4">
-                <BtnProduct featureId={feature[0]._id} />
+                <BtnReadMore productId={feature[0]._id} />
                 <BtnAddToCartPrimary
                   featureId={feature[0]._id}
                   featureName={feature[0].title}

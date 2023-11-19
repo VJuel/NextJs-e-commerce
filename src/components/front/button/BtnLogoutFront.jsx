@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation"
 
-export default function ButtonLogoutFront() {
+export default function BtnLogoutFront() {
   const router = useRouter()
 
   async function handleLogout() {

@@ -7,8 +7,10 @@ export default withAuth(
     },
         {
             callback: {
-                authorized : ({token}) => token?.role === "ADMIN",
+                authorized : ({token}) => 
+                    token?.role === "ADMIN"
+                ,
             }
         }
 )
-export const config = {matcher: ["/dashboard"]};
+export const config = {matcher: ["/dashboard", "/dashboard/*"]};

@@ -22,12 +22,12 @@ const ButtonContainerProduct = styled.button`
     }
   }
 `
-const BtnProduct = ({ featureId }) => {
+const BtnReadMore = ({ productId }) => {
   return (
     <ButtonContainerProduct>
-      <Link href={`/homepage/products/${featureId}`}>Readme more</Link>
+      <Link href={`/homepage/products/${productId}`}>Readme more</Link>
     </ButtonContainerProduct>
   )
 }
 
-export default BtnProduct
+export default BtnReadMore

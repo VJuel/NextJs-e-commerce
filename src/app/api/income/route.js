@@ -6,8 +6,9 @@ export async function GET(req, res) {
   }
   try {
     await mongooseConnect()
-    const balance = await stripe.balance.retrieve()
-    console.log(balance)
+    const balance = await stripe.balance.sessions.retrieve(
+      process.env.STRIPE_SECRET_KEY
+    )
     return NextResponse.json({ balance })
   } catch (error) {
     return NextResponse.error(error)

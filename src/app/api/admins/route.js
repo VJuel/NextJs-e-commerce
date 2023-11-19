@@ -1,36 +1,36 @@
-import {NextResponse} from "next/server";
-// import db from "@/src/lib/db";
-// const Users = mongoose.model.users;*
+import { NextResponse } from "next/server"
+import { main } from "@/src/lib/main"
+import { authorizeUser } from "@/src/lib/authorizeUser"
 
 export async function GET(req) {
-    try {
-        // const collections = await db.().toArray();
-        // const collectionNames = await collections.map((collection) => collection.name);
-
-        const data = await db.user.findMany({
-            where: {
-                role: "ADMIN"
-            }
-        })
-        return NextResponse.json(data)
-    } catch (e) {
-        console.log(e)
-    }
+  await main()
+  try {
+    const data = await db.user.findMany({
+      where: {
+        role: "ADMIN",
+      },
+    })
+    return NextResponse.json(data)
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 export async function PUT(req, res) {
-    try {
-        const data = await req.json()
-        await db.user.updateMany({
-            where: {
-                id: data.id
-            },
-            data: {
-                role: "ADMIN"
-            }
-        })
-        return NextResponse.json(data)
-    } catch (err) {
-        console.log(err)
-    }
+  await main()
+  await authorizeUser()
+  try {
+    const data = await req.json()
+    await db.user.updateMany({
+      where: {
+        email: data.email,
+      },
+      data: {
+        role: "ADMIN",
+      },
+    })
+    return NextResponse.json(data)
+  } catch (err) {
+    console.log(err)
+  }
 }

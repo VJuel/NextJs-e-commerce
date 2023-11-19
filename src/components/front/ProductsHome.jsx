@@ -2,6 +2,7 @@ import Link from "next/link"
 import getProductsBySort from "@/src/lib/functions/getProductsBySort"
 import axios from "redaxios"
 import { BtnAddToCartSecondary } from "@/src/components/front/button/BtnAddToCart"
+import Image from "next/image"
 
 export async function getLastProducts() {
   try {
@@ -34,7 +35,9 @@ export async function ProductsHome() {
                 className="bg-base-100 bg-white shadow-lg rounded-sm flex flex-col justify-between"
                 key={index}
               >
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   className="w-full object-cover h-52 mb-4"
                   src={product.images[0]}
                   alt={product.title}

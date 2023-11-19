@@ -43,7 +43,7 @@ export default function Page() {
       setIsSuccess(true)
       clearCart()
     }
-  }, [])
+  }, [clearCart, isSucess])
 
   if (isSucess) {
     return (

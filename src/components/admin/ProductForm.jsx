@@ -8,6 +8,7 @@ import "@uploadthing/react/styles.css"
 import { useUploadThing } from "@/utils/uploadthing"
 import { UploadButton } from "@/utils/uploadthing"
 import { utapi } from "uploadthing/server"
+import Image from "next/image"
 
 const mongoose = require("mongoose")
 
@@ -131,7 +132,9 @@ export default function ProductForm({
                   onClick={() => deleteImage(link)}
                   className="transition-all relative w-fit h-24 flex [&>div]:hover:flex [&>div]:hover:h-full cursor-pointer radius-xs overflow-hidden"
                 >
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     className="h-full object-cover w-full"
                     src={link}
                     alt="product img"

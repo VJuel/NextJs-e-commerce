@@ -29,15 +29,16 @@ Le site comprend une partie admin pour la gestion des produits, des commandes et
 
 Le projet suit une structure organisée pour faciliter le développement et la maintenance. Les pages Next.js sont placées dans le répertoire `pages/`, les composants réutilisables dans `components/`, les styles dans `styles/`, les fichiers statiques dans `public/`, les modèles de données MongoDB dans `models/`, et les fonctions utilitaires et configurations dans `lib/`.
 
-
 ## Start Application
 
 ### Accédez au répertoire du projet.
+
 cd votre-projet
 
 ### Installez les dépendances du projet.
-```shell
-npm install 
+
+````shell
+npm install
 
 (j'utilise pnpm pour ma part)
 
@@ -61,6 +62,10 @@ BUCKETNAME
 #### EMAIL ADMIN
 EMAIL_ADMIN
 
+###ACCESS DASHBOARD (read only)
+Log -> Email: johndoe@gmail.com
+       Password: 12345
+
 ### Lancez l'application.
 ```shell
 npm run dev
@@ -73,3 +78,4 @@ Ce projet est développé et maintenu par Vicktor Juhel.
 
 ```shell
 git clone https://github.com/VJUEL/votre-projet.git
+````

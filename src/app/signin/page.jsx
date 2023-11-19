@@ -33,12 +33,12 @@ export default function Signin() {
   const userClient = session && role === "USER"
   const [isExistingUser, setIsExistingUser] = useState(false)
 
-  const handleToast = useCallback(() => {
-    return toast({
+  const handleToast = () => {
+    toast({
       title: "User already exists",
       description: `Please login with your credentials`,
     })
-  }, [isExistingUser])
+  }
 
   useEffect(() => {
     console.log(session)
@@ -49,7 +49,7 @@ export default function Signin() {
     if (userClient || role === "") {
       router.push("/homepage")
     }
-  }, [session, loading])
+  }, [session, role, router, userClient])
 
   if (loading) {
     return <Spinner />

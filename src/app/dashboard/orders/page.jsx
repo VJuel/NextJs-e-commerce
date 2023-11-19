@@ -45,11 +45,11 @@ export default async function Page() {
                     <div className="1/2">{el.codePostal}</div>
                     <div>{el.country}</div>
                     <div className="text-medium">
-                      {date.getHours()}h {date.getMinutes()}min, "
+                      {date.getHours()}h {date.getMinutes()}min,
                       {date.toDateString()}
                     </div>
                     <div className="text-medium">
-                      {date.getHours()}h {date.getMinutes()}min, "
+                      {date.getHours()}h {date.getMinutes()}min,
                       {date.toDateString()}
                     </div>
                   </td>

@@ -4,6 +4,7 @@ const FilterWarningsPlugin = require("webpack-filter-warnings-plugin")
 const nextConfig = {
   trailingSlash: false,
   reactStrictMode: false,
+
   transpilePackages: ["@package/bug"],
   env: {
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,

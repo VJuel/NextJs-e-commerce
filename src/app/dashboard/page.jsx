@@ -69,7 +69,9 @@ export default async function Dashboard() {
         </div>
         <div className="flex md:bg-gray-200 bg-none md:items-center md:justify-center gap-4 flex-col md:flex-row justify-start items-start">
           {session?.user?.image ? (
-            <img
+            <Image
+              width={100}
+              hewight={100}
               className="w-10"
               src={session?.user?.image}
               alt={session?.user?.name}

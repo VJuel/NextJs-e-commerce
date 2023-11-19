@@ -15,7 +15,7 @@ export default function Page() {
     if (!loading && session) {
       signOut({ redirect: true, callbackUrl: "/signin" })
     }
-  }, [session, loading])
+  }, [router, loading, session])
 
   if (loading) {
     return (

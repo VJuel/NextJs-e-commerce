@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { BtnAddToCartSecondary } from "@/src/components/front/button/BtnAddToCart"
 import { Skeleton } from "@/src/components/ui/skeleton"
+import Image from "next/image"
 
 export default function ProductDetail({ params }) {
   const [selectedImage, setSelectedImage] = useState(0)
@@ -60,7 +61,9 @@ export default function ProductDetail({ params }) {
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center bg-muted/50">
           {productData.images && productData.images.length > 0 && (
             <>
-              <img
+              <Image
+                width={300}
+                height={300}
                 src={productData.images[selectedImage]}
                 alt={productData.title}
                 className=" w-full min-h-[300px] object-cover"
@@ -71,7 +74,9 @@ export default function ProductDetail({ params }) {
                     key={index}
                     className="flex justify-content items-center p-2 borde borderr-1-black- rounded-sm"
                   >
-                    <img
+                    <Image
+                      width={100}
+                      height={100}
                       src={img}
                       alt={`${productData.title} ${index}`}
                       className="w-24 h-24 cursor-pointer object-cover"

@@ -45,7 +45,7 @@ export default function Login() {
     if (userClient || role === "") {
       router.push("/homepage")
     }
-  }, [session, loading])
+  }, [session, role, router, userClient])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -85,7 +85,7 @@ export default function Login() {
       })
       setDisabled(!allFilled)
     }
-  }, [handleInputChange])
+  }, [inputValues])
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -146,7 +146,7 @@ export default function Login() {
               Google
             </Button>
             <p className="mt-4 flex justify-center items-center">
-              You don't have an account?
+              You don&apos;t have an account?
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

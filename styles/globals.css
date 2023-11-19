@@ -126,6 +126,14 @@ label {
   background: #222;
 }
 
+p {
+  @apply leading-5 text-base;
+}
+
+.paddingImg {
+  @apply py-2;
+}
+
 .header {
   position: -webkit-sticky;
   position: sticky;
@@ -268,12 +276,6 @@ tr > td {
 .slick-slider .slick-list {
   margin: 0;
   height: 100%;
-}
-
-.slick-slider .slick-list .slick-slide img {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 .slick-slider .slick-arrow {
@@ -420,4 +422,26 @@ tr > td {
 
 .slick-dots li.slick-active button {
   background: blue;
+}
+
+/* Supposons que vos images sont dans des éléments <img> avec une classe 'image-class' */
+.slick-slide:first-child {
+  /* Premier enfant */
+  padding-right: 10px;
+}
+
+.slick-slide:not(:last-child),
+.slick-slide:not(:first-child) {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.slick-slide:last-child {
+  /* Troisième enfant */
+  padding-left: 10px;
+}
+
+:disabled {
+  pointer-events: all !important;
+  cursor: not-allowed;
 }

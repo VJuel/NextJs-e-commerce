@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import ButtonLogoutFront from "@/src/components/front/button/ButtonLogoutFront"
+import BtnLogoutFront from "@/src/components/front/button/BtnLogoutFront"
 import { CartContext } from "@/src/components/CartContext"
 import {
   DropdownMenu,
@@ -16,17 +16,16 @@ import {
   DropdownMenuTrigger,
 } from "/src/components/ui/dropdown-menu"
 
-export default function NavFront({ cookieSession }) {
+export default function NavFront({ session }) {
+  console.log(session)
   const [theme, setTheme] = useState(
     typeof window !== "undefined" && localStorage.getItem("theme")
       ? localStorage.getItem("theme")
       : "corporate"
   )
-  const { data: session, status } = useSession()
   const [navActive, setNavActive] = useState(false)
   const pathname = usePathname()
   const { cartProducts } = useContext(CartContext)
-  // const session = await getServerSession(authOptions);
   const inactiveLink =
     "flex w-fit lg:text-white text-gray-600 whitespace-nowrap"
   const activeLink =
@@ -219,7 +218,7 @@ export default function NavFront({ cookieSession }) {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-white w-[90%] m-auto" />
                   <DropdownMenuItem>
-                    <ButtonLogoutFront />
+                    <BtnLogoutFront />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

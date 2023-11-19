@@ -1,8 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import axios from "redaxios"
-import Link from "next/link"
-import { get } from "mongoose"
+import { BtnDisabled } from "@/src/components/admin/button/BtnDisabled"
 
 export default function Page() {
   const [productName, setProductName] = useState("")
@@ -109,9 +108,14 @@ export default function Page() {
           onChange={handleChangeId}
           placeholder="id : 1234567.."
         />
-        <button className="btn-primary w-1/3" type="submit">
-          add feature
-        </button>
+        <BtnDisabled
+          message={"Add featured"}
+          path={"new"}
+          className="flex btn-primary"
+          svgSpecial={null}
+          size={"small"}
+          type="submit"
+        />
       </form>
 
       <h2 className="mb-2">Featured</h2>
