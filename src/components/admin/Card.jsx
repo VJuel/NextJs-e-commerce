@@ -35,7 +35,7 @@ export default async function CardDetails({ type }) {
     } else {
       data = await getProducts()
     }
-    return await getIncome()
+    // return await getIncome()
   }
 
   let data = await getDifferentData()

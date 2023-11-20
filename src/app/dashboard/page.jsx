@@ -92,7 +92,7 @@ export default async function Dashboard() {
         </Suspense>
 
         {/* revenu */}
-        <CardDetails type="Revenue" />
+        {/* <CardDetails type="Revenue" /> */}
 
         {/* Orders */}
         <CardDetails type="Orders" />
