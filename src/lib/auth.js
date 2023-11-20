@@ -72,8 +72,6 @@ export const authOptions = {
     Google({
       clientId: getGoogleCredentials().clientId,
       clientSecret: getGoogleCredentials().clientSecret,
-      authorizationUrl:
-        "https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code",
     }),
   ],
   callbacks: {
