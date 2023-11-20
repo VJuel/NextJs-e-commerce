@@ -8,7 +8,7 @@ export default async function Products() {
     }
   )
   return (
-    <section className="p-10 flex flex-col justify-center items-center w-full">
+    <section className="layout bg-gray-100 min-h-[90vh] p-10 flex flex-col justify-center items-center w-full">
       <SearchBar productsData={productsData} />
     </section>
   )

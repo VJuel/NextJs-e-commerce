@@ -19,7 +19,7 @@ export default async function Page() {
     })
 
   return (
-    <>
+    <section className="layout">
       <h1 className="title-dashboard mb-2">Products</h1>
 
       <BtnDisabled
@@ -63,6 +63,6 @@ export default async function Page() {
             ))}
         </tbody>
       </table>
-    </>
+    </section>
   )
 }
