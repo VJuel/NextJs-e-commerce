@@ -1,5 +1,6 @@
 "use client"
 import { createContext, useEffect, useState } from "react"
+import { useMemo } from "react"
 
 export const CartContext = createContext()
 

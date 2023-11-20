@@ -1,4 +1,4 @@
-import { createUploadthing, type FileRouter } from "uploadthing/next"
+import { createUploadthing } from "uploadthing/next"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/src/lib/auth"
 
@@ -18,8 +18,8 @@ export const ourFileRouter = {
       if (!session) throw new Error("Unauthorized")
 
       if (
-        session?.user.role !== "ADMIN" ||
-        session?.user.email === "johndoe@gmail.com"
+        session?.user?.role !== "ADMIN" ||
+        session?.user?.email === "johndoe@gmail.com"
       )
         throw new Error("Unauthorized")
 
@@ -29,6 +29,4 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
     }),
-} satisfies FileRouter
-
-export type OurFileRouter = typeof ourFileRouter
+}
