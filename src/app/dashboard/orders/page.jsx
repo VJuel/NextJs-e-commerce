@@ -3,7 +3,7 @@ import clsx from "clsx"
 
 export default async function Page() {
   const orderData = await axios
-    .get("http://localhost:3000/api/order", { next: { revalidate: 10 } })
+    .get("http://localhost:3000/api/order") //, { next: { revalidate: 30 } })
     .then((res) => {
       return res.data
     })
@@ -14,6 +14,7 @@ export default async function Page() {
   const quantity = orderData.map((el, index) => {
     return el.line_items
   })
+
   return (
     <div>
       <h1>Orders</h1>
@@ -27,7 +28,7 @@ export default async function Page() {
           </tr>
           <tr></tr>
           {orderData &&
-            orderData.map((el, index) => {
+            orderData?.map((el, index) => {
               let date = new Date(el.createdAt)
               return (
                 <tr key={index}>
