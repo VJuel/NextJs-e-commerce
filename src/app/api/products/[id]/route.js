@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { Product } from "@/src/models/Product"
 import mongooseConnect from "@/src/lib/mongoose"
-import authorizeUser from "@/src/lib/authorizeUser"
+import { authorizeUser } from "@/src/lib/authorizeUser"
 
 async function main() {
   try {
