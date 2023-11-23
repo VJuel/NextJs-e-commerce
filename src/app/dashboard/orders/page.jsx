@@ -11,10 +11,6 @@ export default async function Page() {
       console.log(err)
     })
 
-  const quantity = orderData.map((el, index) => {
-    return el.line_items
-  })
-
   return (
     <div>
       <h1>Orders</h1>
