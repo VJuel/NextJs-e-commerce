@@ -3,7 +3,7 @@ import clsx from "clsx"
 
 export default async function Page() {
   const orderData = await axios
-    .get("http://localhost:3000/api/order") //, { next: { revalidate: 30 } })
+    .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/order`) //, { next: { revalidate: 30 } })
     .then((res) => {
       return res.data
     })

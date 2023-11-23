@@ -21,7 +21,9 @@ export default async function Dashboard() {
   const session = await getServerSession(authOptions)
 
   const productData = await axios
-    .get("http://localhost:3000/api/products", { next: { revalidate: 30 } })
+    .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`, {
+      next: { revalidate: 30 },
+    })
     .then((res) => {
       return res.data
     })

@@ -14,7 +14,7 @@ export default function Page() {
 
   async function getProducts() {
     await axios
-      .get("/api/products")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`)
       .then((res) => {
         setAllProducts(res.data)
       })
@@ -52,7 +52,7 @@ export default function Page() {
 
   function getFeatured() {
     axios
-      .get("/api/settings")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/settings`)
       .then((res) => {
         setOldFeatured(res.data)
       })
@@ -64,7 +64,7 @@ export default function Page() {
   function handleSubmit(e) {
     e.preventDefault()
     axios
-      .put("/api/settings", {
+      .put(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/settings`, {
         title: productName,
         id: idValue,
         oldId: oldFeatured ? oldFeatured._id : undefined,

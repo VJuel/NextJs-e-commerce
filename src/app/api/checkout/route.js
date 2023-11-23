@@ -59,8 +59,10 @@ export async function POST(req, res) {
       line_items,
       mode: "payment",
       customer_email: email,
-      success_url: process.env.NEXTAUTH_URL + "/homepage/cart?success=1",
-      cancel_url: process.env.NEXTAUTH_URL + "/homepage/cart?success=1",
+      success_url:
+        process.env.NEXT_PUBLIC_VERCEL_URL + "/homepage/cart?success=1",
+      cancel_url:
+        process.env.NEXT_PUBLIC_VERCEL_URL + "/homepage/cart?success=1",
       metadata: { orederId: orderDoc._id.toString() },
     })
 

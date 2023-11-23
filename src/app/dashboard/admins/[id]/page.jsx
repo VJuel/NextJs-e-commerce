@@ -11,9 +11,11 @@ export default function DeleteAdminPage() {
   const { id } = useParams()
 
   useEffect(() => {
-    axios.get(`/api/admins/` + id).then((res) => {
-      setUser(res.data)
-    })
+    axios
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/admins/` + id)
+      .then((res) => {
+        setUser(res.data)
+      })
   }, [id])
 
   function goBack() {
@@ -21,7 +23,9 @@ export default function DeleteAdminPage() {
   }
   async function deleteAdmin() {
     try {
-      const res = await axios.put(`/api/admins/` + id)
+      const res = await axios.put(
+        process.env.NEXT_PUBLIC_VERCEL_URL + `/api/admins/` + id
+      )
       if (res?.status > 400) {
         throw new Error(
           "Une erreur s'est produite lors de la suppression de l'administrateur"

@@ -17,7 +17,7 @@ export default function Page() {
   useEffect(() => {
     if (typeof window !== "undefined" && cartProducts.length > 0) {
       axios
-        .post("/api/cart", cartProducts)
+        .post(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/cart`, cartProducts)
         .then((res) => {
           setProducts(res.data)
         })

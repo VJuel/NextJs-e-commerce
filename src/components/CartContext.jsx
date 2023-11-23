@@ -15,13 +15,13 @@ export default function CartContextProvider({ children }) {
     if (cartProducts?.length > 0) {
       ls?.setItem("cart", JSON.stringify(cartProducts))
     }
-  }, [ls, cartProducts])
+  }, [ls])
 
   useEffect(() => {
     if (ls && ls.getItem("cart")) {
       setCartProducts(JSON.parse(ls.getItem("cart")))
     }
-  }, [ls, cartProducts])
+  }, [ls])
 
   function addProduct(productId) {
     setCartProducts((prev) => [...prev, productId])

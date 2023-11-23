@@ -57,9 +57,11 @@ export default function FormPayement({ loading }) {
     data.cartProducts = cartProducts
 
     try {
-      const response = await axios.post("/api/checkout", data).then((res) => {
-        return res.data
-      })
+      const response = await axios
+        .post(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/checkout`, data)
+        .then((res) => {
+          return res.data
+        })
       if (response?.data) {
         window.location = response.data
       }

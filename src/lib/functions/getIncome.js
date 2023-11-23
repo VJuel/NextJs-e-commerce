@@ -2,7 +2,7 @@ import axios from "redaxios"
 
 export async function getIncome() {
   const income = await axios
-    .get("http://localhost:3000/api/income")
+    .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/income`)
     .then((res) => {
       return res.data
     })

@@ -7,7 +7,7 @@ import Image from "next/image"
 export async function getLastProducts() {
   try {
     const feature = await axios
-      .get("http://localhost:3000/api/products")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`)
       .then((res) => {
         return res.data
       })

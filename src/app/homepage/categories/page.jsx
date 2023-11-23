@@ -16,7 +16,7 @@ export default function Categories() {
 
   useEffect(() => {
     axios
-      .get("/api/categories")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/categories`)
       .then((res) => {
         console.log(res.data)
         setCategories(res.data)
@@ -24,7 +24,7 @@ export default function Categories() {
       .catch((err) => console.log(err))
 
     axios
-      .get("/api/products/categories")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products/categories`)
       .then((res) => {
         console.log(res.data)
         setProductsCategories(res.data)

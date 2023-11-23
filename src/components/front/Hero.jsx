@@ -9,7 +9,7 @@ import FeatureImgSkelton from "@/src/components/skeleton/FeatureImgSkeleton"
 export async function getFeatures() {
   try {
     const feature = await axios
-      .get("http://localhost:3000/api/products/features")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products/features`)
       .then((res) => {
         return res.data
       })

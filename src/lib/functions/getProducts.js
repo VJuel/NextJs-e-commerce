@@ -2,7 +2,7 @@ import axios from "redaxios"
 
 export async function getProducts() {
   const productData = await axios
-    .get("http://localhost:3000/api/products")
+    .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`)
     .then((res) => {
       return res.data
     })

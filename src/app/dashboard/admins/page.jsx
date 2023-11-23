@@ -11,7 +11,7 @@ export default function Page() {
 
   useEffect(() => {
     axios
-      .get("/api/admins")
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/admins`)
       .then((res) => {
         setAdmins(res.data)
       })
@@ -23,7 +23,7 @@ export default function Page() {
   async function handleSubmit(e) {
     e.preventDefault()
     axios
-      .put("/api/admins", {
+      .put(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/admins`, {
         email: emailValue,
       })
       .then((res) => {

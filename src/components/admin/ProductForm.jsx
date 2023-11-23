@@ -42,7 +42,9 @@ export default function ProductForm({
 
   function getCategories() {
     axios
-      .get("/api/categories", { next: { revalidate: 10 } })
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/categories`, {
+        next: { revalidate: 10 },
+      })
       .then((res) => {
         setCategories(res.data)
       })
@@ -63,9 +65,15 @@ export default function ProductForm({
     }
     const idDate = new ObjectId(id).toString()
     if (idDate === id) {
-      return await axios.put("/api/products", product)
+      return await axios.put(
+        process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`,
+        product
+      )
     } else {
-      return await axios.post("/api/products", product)
+      return await axios.post(
+        process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`,
+        product
+      )
     }
   }
 

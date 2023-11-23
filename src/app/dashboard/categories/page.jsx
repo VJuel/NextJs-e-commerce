@@ -28,7 +28,9 @@ function Categories({ swal }) {
 
   async function fetchCategories() {
     await axios
-      .get("/api/categories", { next: { revalidate: 10 } })
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/categories`, {
+        next: { revalidate: 10 },
+      })
       .then((result) => {
         setCategories(result.data)
       })
@@ -76,10 +78,16 @@ function Categories({ swal }) {
     }
     if (editedCategory) {
       data._id = editedCategory._id
-      await axios.put("/api/categories", data)
+      await axios.put(
+        process.env.NEXT_PUBLIC_VERCEL_URL + `/api/categories`,
+        data
+      )
       setEditedCategory(null)
     } else {
-      await axios.post("/api/categories", data)
+      await axios.post(
+        process.env.NEXT_PUBLIC_VERCEL_URL + `/api/categories`,
+        data
+      )
     }
     await setName("")
     setParentCategory("")
@@ -115,7 +123,9 @@ function Categories({ swal }) {
       .then(async (result) => {
         if (result.isConfirmed) {
           const { _id } = category
-          await axios.delete(`/api/categories/${_id}`)
+          await axios.delete(
+            process.env.NEXT_PUBLIC_VERCEL_URL + `/api/categories/${_id}`
+          )
           fetchCategories()
         }
       })

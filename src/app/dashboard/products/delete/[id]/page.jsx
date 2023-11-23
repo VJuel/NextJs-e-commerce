@@ -12,15 +12,19 @@ export default function DeleteProductPage() {
     if (!id) {
       return
     }
-    axios.get("/api/products?id=" + id).then((res) => {
-      setProductInfo(res.data)
-    })
+    axios
+      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products?id=` + id)
+      .then((res) => {
+        setProductInfo(res.data)
+      })
   }, [id])
   function goBack() {
     router.push("/dashboard/products")
   }
   async function deleteProduct() {
-    await axios.delete(`/api/products/${id}`)
+    await axios.delete(
+      process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products/${id}`
+    )
     goBack()
   }
 

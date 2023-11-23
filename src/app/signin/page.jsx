@@ -81,9 +81,11 @@ export default function Signin() {
     formData.append("email", email)
     formData.append("password", password)
 
-    const user = await axios.post("/api/register", formData).then((res) => {
-      return res.data
-    })
+    const user = await axios
+      .post(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/register`, formData)
+      .then((res) => {
+        return res.data
+      })
 
     if (user?.isExistingUser) {
       setIsExistingUser(!isExistingUser)

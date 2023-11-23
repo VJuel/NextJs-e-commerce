@@ -1,5 +1,6 @@
-
 export default async function getOneProduct(id) {
-    const res = await fetch(`http://localhost:3000/api/products/${id}`)
-    return res.json()
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products/${id}`
+  )
+  return res.json()
 }
