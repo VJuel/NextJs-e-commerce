@@ -2,14 +2,7 @@ import React from "react"
 import mongooseConnect from "@/src/lib/mongoose"
 import { Product } from "@/src/models/Product"
 import { NextResponse } from "next/server"
-
-async function main() {
-  try {
-    await mongooseConnect()
-  } catch (e) {
-    console.log(e)
-  }
-}
+import { main } from "@/src/lib/main"
 
 export async function GET() {
   await main()
@@ -18,6 +11,7 @@ export async function GET() {
     return NextResponse.json(data)
   } catch (e) {
     console.log(e)
+    return NextResponse.error()
   }
 }
 

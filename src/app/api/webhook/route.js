@@ -39,7 +39,7 @@ export async function POST(req, res) {
   }
 
   // Return a 200 response to acknowledge receipt of the event
-  response.send()
+  return NextResponse.json({ success: true }, { status: 200 })
 }
 
 // export const config = {

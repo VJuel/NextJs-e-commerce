@@ -2,14 +2,7 @@ import { NextResponse } from "next/server"
 import { Product } from "@/src/models/Product"
 import mongooseConnect from "@/src/lib/mongoose"
 import { authorizeUser } from "@/src/lib/authorizeUser"
-
-async function main() {
-  try {
-    await mongooseConnect()
-  } catch (e) {
-    console.log(e)
-  }
-}
+import { main } from "@/src/lib/main"
 
 export async function DELETE(request, { params }) {
   await main()
@@ -20,6 +13,7 @@ export async function DELETE(request, { params }) {
     return NextResponse.json({ message: "deleted" })
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }
 
@@ -29,7 +23,8 @@ export async function GET(req, { params }) {
   try {
     const data = await Product.findById(id)
     return NextResponse.json(data)
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    console.log(err)
+    return NextResponse.error()
   }
 }

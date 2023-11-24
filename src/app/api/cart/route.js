@@ -11,7 +11,8 @@ export async function POST(req, res) {
     const ids = await req.json()
     const data = await Product.find({ _id: { $in: ids } })
     return NextResponse.json(data)
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
+    return NextResponse.error()
   }
 }

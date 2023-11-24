@@ -31,5 +31,6 @@ export async function PUT(req, res) {
     return NextResponse.json(newFeature)
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }

@@ -68,6 +68,6 @@ export async function POST(req, res) {
 
     return NextResponse.json({ data: session.url })
   } catch (err) {
-    return console.log(err, "error stripe management redirect")
+    return NextResponse.error(err)
   }
 }

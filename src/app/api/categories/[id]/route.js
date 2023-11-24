@@ -12,5 +12,6 @@ export async function DELETE(request, { params }) {
     return NextResponse.json({ message: "deleted" })
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }

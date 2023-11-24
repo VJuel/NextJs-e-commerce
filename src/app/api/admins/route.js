@@ -11,8 +11,9 @@ export async function GET(req) {
       },
     })
     return NextResponse.json(data)
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    console.log(err)
+    return NextResponse.error()
   }
 }
 
@@ -32,5 +33,6 @@ export async function PUT(req, res) {
     return NextResponse.json(data)
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }

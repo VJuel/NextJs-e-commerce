@@ -1,22 +1,15 @@
 import { Category } from "@/src/models/Category"
-import mongooseConnect from "@/src/lib/mongoose"
 import { NextResponse, NextRequest } from "next/server"
-
-async function main() {
-  try {
-    await mongooseConnect()
-  } catch (e) {
-    console.log(e)
-  }
-}
+import { main } from "@/src/lib/main"
 
 export async function GET(req, res) {
   await main()
   try {
     const data = await Category.find().populate("parent")
     return NextResponse.json(data)
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    console.log(err)
+    return NextResponse.error()
   }
 }
 
@@ -35,6 +28,7 @@ export async function PUT(req, res) {
     return new NextResponse(categoryDoc)
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }
 export async function POST(req, res) {
@@ -48,5 +42,6 @@ export async function POST(req, res) {
     return new NextResponse(categoryDoc)
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }

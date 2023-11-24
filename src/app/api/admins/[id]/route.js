@@ -9,8 +9,9 @@ export async function GET(req, { params }) {
       where: { id },
     })
     return NextResponse.json(data)
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    console.log(err)
+    return NextResponse.error()
   }
 }
 
@@ -29,5 +30,6 @@ export async function PUT(request, { params }) {
     return NextResponse.json({ message: "Role modified" })
   } catch (err) {
     console.log(err)
+    return NextResponse.error()
   }
 }

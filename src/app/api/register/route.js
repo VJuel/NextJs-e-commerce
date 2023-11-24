@@ -1,5 +1,3 @@
-import { PrismaClient } from "@prisma/client"
-import { z } from "zod"
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 
