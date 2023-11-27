@@ -84,52 +84,54 @@ export default function Categories() {
   return (
     <div className="flex flex-col w-full justify-center items-center py-10">
       <h1 className="text-left text-2xl font-bold mb-8">Catégories</h1>
-      {Object.keys(productsCategories).map((category, index) => (
-        <div
-          key={index}
-          className="flex flex-col justify-center items-center w-full mb-6"
-        >
-          <h2 className="font-semibold text-xl mb-8">{category.name}</h2>
-          <div className="max-w-7xl padding-slider !flex justify-center items-center w-full">
-            <Slider {...settings}>
-              {productsCategories[category].map((product, index) => (
-                <article
-                  key={product._id}
-                  className="min-h-[270px] h-auto border-2 border-blacklg:shadow-lg px-2w-full lg:w-1/3 !flex flex-row md:flex-col xl:flex-row justify-start card overflow-hidden bg-base-100 bg-white shadow-lg cursor-pointer rounded-sm"
-                >
-                  <div className="flex justify-center items-center w-[48%] md:w-full h-auto xl:w-[42%]">
-                    <Image
-                      width={150}
-                      height={150}
-                      src={product.images[0]}
-                      alt={product.title}
-                      className="h-full flex w-full object-cover"
-                    />
-                  </div>
-                  <div className=" h-full !flex flex-col justify-between items p-4 w-[52%] md:w-full xl:w-[58%]">
-                    <h2 className="card-title mb-2">{product.title}</h2>
-                    <p className="grow mb-1">{product.description}</p>
-                    <p className="text-2xl text-left font-bold w-1/2 whitespace-nowrap grow">
-                      $ {product.price}
-                    </p>
-                    <div className="card-actions justify-between flex flex-col md:flex-row items-start md:items-center mt-2 gap-2">
-                      <BtnAddToCartSecondary
-                        id={product._id}
-                        className="text-sm !px-2 flex justify-center m-auto grow w-1/2 [&>svg]:text-xs"
-                      />
-                      <BtnReadMore className=" w-1/2" />
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </Slider>
-            {/* <div
+      {productsCategories &&
+        Object.keys(productsCategories).map((category, index) => (
+          <div
+            key={index}
+            className="flex flex-col justify-center items-center w-full mb-6"
+          >
+            <h2 className="font-semibold text-xl mb-8">{category.name}</h2>
+            <div className="max-w-7xl padding-slider !flex justify-center items-center w-full">
+              <Slider {...settings}>
+                {productsCategories &&
+                  productsCategories[category].map((product, index) => (
+                    <article
+                      key={product._id}
+                      className="min-h-[270px] h-auto border-2 border-blacklg:shadow-lg px-2w-full lg:w-1/3 !flex flex-row md:flex-col xl:flex-row justify-start card overflow-hidden bg-base-100 bg-white shadow-lg cursor-pointer rounded-sm"
+                    >
+                      <div className="flex justify-center items-center w-[48%] md:w-full h-auto xl:w-[42%]">
+                        <Image
+                          width={150}
+                          height={150}
+                          src={product.images[0]}
+                          alt={product.title}
+                          className="h-full flex w-full object-cover"
+                        />
+                      </div>
+                      <div className=" h-full !flex flex-col justify-between items p-4 w-[52%] md:w-full xl:w-[58%]">
+                        <h2 className="card-title mb-2">{product.title}</h2>
+                        <p className="grow mb-1">{product.description}</p>
+                        <p className="text-2xl text-left font-bold w-1/2 whitespace-nowrap grow">
+                          $ {product.price}
+                        </p>
+                        <div className="card-actions justify-between flex flex-col md:flex-row items-start md:items-center mt-2 gap-2">
+                          <BtnAddToCartSecondary
+                            id={product._id}
+                            className="text-sm !px-2 flex justify-center m-auto grow w-1/2 [&>svg]:text-xs"
+                          />
+                          <BtnReadMore className=" w-1/2" />
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+              </Slider>
+              {/* <div
               className="nav-slide flex bg-red-500 h-[15px] w-[15px] rounded-2xl cursor-pointer"
               id="nav-slide"
             ></div> */}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   )
 }
