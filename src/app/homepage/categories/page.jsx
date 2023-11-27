@@ -30,12 +30,6 @@ export default function Categories() {
         setProductsCategories(res.data)
       })
       .catch((err) => console.log(err))
-
-    if (categories || productsCategories) {
-      Object.keys(productsCategories).map((category, index) => {
-        console.log("Rendu pour la catégorie: ", category)
-      })
-    }
   })
 
   if (!categories || !productsCategories || typeof window === "undefined") {
@@ -47,18 +41,6 @@ export default function Categories() {
         </div>
       </div>
     )
-  }
-
-  function addPadding() {
-    let padding = 0
-    if (productsCategories[category].length === 1) {
-      padding = 0
-    } else if (productsCategories[category].length === 2) {
-      padding = 0
-    } else {
-      padding = 0
-    }
-    return padding
   }
 
   const settings = {

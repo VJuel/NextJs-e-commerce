@@ -41,7 +41,6 @@ export default function Signin() {
   }
 
   useEffect(() => {
-    console.log(session)
     if (session && role === "ADMIN") {
       router.push("/dashboard")
     }
