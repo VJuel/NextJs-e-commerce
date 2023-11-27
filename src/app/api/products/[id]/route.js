@@ -4,6 +4,8 @@ import mongooseConnect from "@/src/lib/mongoose"
 import { authorizeUser } from "@/src/lib/authorizeUser"
 import { main } from "@/src/lib/main"
 
+export const dynamic = "force-dynamic"
+
 export async function DELETE(request, { params }) {
   await main()
   await authorizeUser()

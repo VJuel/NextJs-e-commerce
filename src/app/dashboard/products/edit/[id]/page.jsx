@@ -1,10 +1,4 @@
 import ProductForm from "@/src/components/admin/ProductForm"
-const ObjectId = require("mongoose").Types.ObjectId
-
-// TODO A TEST
-// import { Suspense } from 'react'
-// <Suspense fallback={<p>Loading weather...</p>}>
-async function getOneProduct(id) {}
 
 export default async function EditProductPage({ params: { id } }) {
   const productInfo = await fetch(

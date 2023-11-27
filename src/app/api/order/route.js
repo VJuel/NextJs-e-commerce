@@ -3,6 +3,8 @@ import { Order } from "@/src/models/Order"
 import mongooseConnect from "@/src/lib/mongoose"
 import { main } from "@/src/lib/main"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   await main()
   try {

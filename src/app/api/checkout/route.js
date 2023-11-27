@@ -5,6 +5,8 @@ import { Order } from "@/src/models/Order"
 import { metadata } from "../../head"
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
+export const dynamic = "force-dynamic"
+
 export async function POST(req, res) {
   if (req.method !== "POST") {
     return NextResponse.json({ message: "is not a POST REQUEST" })

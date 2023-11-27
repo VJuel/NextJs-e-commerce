@@ -12,44 +12,6 @@ export default function Page() {
     getFeatured()
   }, [])
 
-  async function getProducts() {
-    await axios
-      .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/products`)
-      .then((res) => {
-        setAllProducts(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  //async function ChangeFeatures24Heures() {
-  // Mettez ici le code que vous voulez exécuter toutes les 24 heures
-
-  //await getProducts()
-  //const count = await allProducts.length;
-  //const random = Math.floor(Math.random() * count);
-  //const randomProduct = allProducts[random];
-  //const id = randomProduct._id;
-  // await axios.put('/api/settings', {
-  //    title: randomProduct.title,
-  //    id: id,
-  //    oldId: oldFeatured ? oldFeatured._id : undefined
-  //})
-  //    .then(res => {
-  //        setNewFeatured(res.data)
-  //    }
-  //    )
-  //    .catch(err => {
-  //        console.log(err)
-  //    })
-  //}
-
-  // Exécute la fonction une fois immédiatement
-
-  // Programme l'exécution de la fonction toutes les 24 heures (24 * 60 * 60 * 1000 millisecondes)
-  //setInterval(getProducts, ChangeFeatures24Heures, 24 * 60 * 60 * 1000);
-
   function getFeatured() {
     axios
       .get(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/settings`)
@@ -70,7 +32,7 @@ export default function Page() {
         oldId: oldFeatured ? oldFeatured._id : undefined,
       })
       .then((res) => {
-        setNewFeatured(res.data)
+        // setNewFeatured(res.data)
         setProductName("")
         setIdValue("")
         setOldFeatured([])

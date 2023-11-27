@@ -4,6 +4,8 @@ import mongooseConnect from "@/src/lib/mongoose"
 import { main } from "@/src/lib/main"
 import { authorizeUser } from "@/src/lib/authorizeUser"
 
+export const dynamic = "force-dynamic"
+
 export async function POST(req, res) {
   await main()
   await authorizeUser()

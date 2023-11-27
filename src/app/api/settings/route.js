@@ -3,6 +3,8 @@ import { Product } from "@/src/models/Product"
 import { main } from "@/src/lib/main"
 import { authorizeUser } from "@/src/lib/authorizeUser"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(req) {
   try {
     const data = await Product.findOne({ featured: true })

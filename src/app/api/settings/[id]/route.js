@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import { main } from "@/src/lib/main"
 import { authorizeUser } from "@/src/lib/authorizeUser"
 
+export const dynamic = "force-dynamic"
+
 export async function PUT(request, { params }) {
   await authorizeUser()
   await main()

@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 
+export const dynamic = "force-dynamic"
+
 export async function POST(req, res) {
   const formData = await req.formData()
   let email = formData.get("email")

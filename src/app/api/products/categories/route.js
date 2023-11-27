@@ -4,6 +4,8 @@ import { Category } from "@/src/models/Category"
 import { Product } from "@/src/models/Product"
 import { main } from "@/src/lib/main"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(req, res) {
   await main()
   const productsByCategory = {}

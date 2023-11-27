@@ -2,6 +2,8 @@ import { Category } from "@/src/models/Category"
 import { NextResponse, NextRequest } from "next/server"
 import { main } from "@/src/lib/main"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(req, res) {
   await main()
   try {

@@ -2,6 +2,8 @@ import { Product } from "@/src/models/Product"
 import { NextResponse } from "next/server"
 import { main } from "@/src/lib/main"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   await main()
   try {
